@@ -24,7 +24,7 @@ export function PhoneMockup() {
       whileInView={{ opacity: 1, scale: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
       transition={{ type: 'spring', stiffness: 90, damping: 16 }}
-      className="relative mx-auto w-full max-w-[300px] self-center"
+      className="relative mx-auto w-full max-w-[300px] self-center max-[820px]:max-w-[260px] max-[820px]:w-[76vw]"
     >
       {/* glow */}
       <div

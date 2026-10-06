@@ -8,6 +8,8 @@ type Props = {
   duration?: number
   prefix?: string
   suffix?: string
+  /** Number of decimal places to show (default 0). */
+  decimals?: number
   className?: string
 }
 
@@ -17,6 +19,7 @@ export function AnimatedCounter({
   duration = 1.4,
   prefix = '',
   suffix = '',
+  decimals = 0,
   className,
 }: Props) {
   const ref = useRef<HTMLSpanElement>(null)
@@ -31,18 +34,32 @@ export function AnimatedCounter({
       const p = Math.min(1, (now - start) / (duration * 1000))
       // easeOutCubic
       const eased = 1 - Math.pow(1 - p, 3)
-      setVal(Math.round(eased * to))
+      setVal(eased * to)
       if (p < 1) raf = requestAnimationFrame(tick)
     }
     raf = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(raf)
   }, [inView, to, duration])
 
+  const formatted =
+    decimals > 0
+      ? val.toLocaleString('pt-BR', {
+          minimumFractionDigits: decimals,
+          maximumFractionDigits: decimals,
+        })
+      : Math.round(val).toLocaleString('pt-BR')
+
   return (
-    <span ref={ref} className={className}>
+    <motion.span
+      ref={ref}
+      className={className}
+      initial={{ opacity: 0.6 }}
+      animate={{ opacity: inView ? 1 : 0.6 }}
+      transition={{ duration: 0.4 }}
+    >
       {prefix}
-      {val.toLocaleString('pt-BR')}
+      {formatted}
       {suffix}
-    </span>
+    </motion.span>
   )
 }

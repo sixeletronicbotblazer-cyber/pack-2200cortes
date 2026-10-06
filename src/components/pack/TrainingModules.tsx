@@ -44,20 +44,20 @@ export function TrainingModules() {
             damping: 16,
             delay: i * 0.05,
           }}
-          className="group grid grid-cols-[64px_1fr] gap-[18px] border-t border-[#2a2a30] py-[22px] first:border-t-0"
+          className="group grid grid-cols-[64px_1fr] gap-[18px] border-t border-[#2a2a30] py-[22px] first:border-t-0 max-[820px]:grid-cols-[48px_1fr] max-[820px]:gap-3"
         >
           <motion.div
-            className="font-display text-[44px] font-bold leading-none text-[#e11d2e] transition-colors group-hover:text-[#f5a524]"
+            className="font-display text-[44px] font-bold leading-none text-[#e11d2e] transition-colors group-hover:text-[#f5a524] max-[820px]:text-[34px]"
             whileHover={{ scale: 1.06 }}
             transition={{ type: 'spring', stiffness: 300, damping: 18 }}
           >
             0{i + 1}
           </motion.div>
           <div>
-            <h3 className="mb-1 font-display text-[24px] font-bold uppercase leading-tight">
+            <h3 className="mb-1 font-display text-[24px] font-bold uppercase leading-tight max-[820px]:text-[20px]">
               {m.title}
             </h3>
-            <p className="text-[#b9b3a9]">{m.desc}</p>
+            <p className="text-[#b9b3a9] max-[820px]:text-[14px]">{m.desc}</p>
           </div>
         </motion.div>
       ))}

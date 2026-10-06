@@ -49,12 +49,12 @@ export default function PackPoliticaPage() {
       <CountdownBar />
 
       {/* 1. HERO */}
-      <Scene image={IMG.hero} minH="92vh">
-        <motion.div variants={sceneStagger} initial="hidden" animate="show" className="max-w-[11.5em]">
+      <Scene image={IMG.hero} mobileImage={IMG.heroM} variant="hero">
+        <motion.div variants={sceneStagger} initial="hidden" animate="show" className="max-w-[11.5em] max-[820px]:max-w-none">
           <Kicker>Pack Política · acesso vitalício</Kicker>
           <motion.h1
             variants={sceneRise}
-            className="font-display text-[clamp(40px,7.2vw,92px)] font-bold leading-[1.02] tracking-[0.01em]"
+            className="font-display text-[clamp(40px,7.2vw,92px)] font-bold leading-[1.02] tracking-[0.01em] max-[820px]:text-[clamp(34px,10.4vw,48px)] max-[360px]:text-[32px]"
           >
             +5 mil cortes de política para criar conteúdo e{' '}
             <em className="not-italic text-[#e11d2e]">buscar suas primeiras vendas</em>
@@ -64,7 +64,7 @@ export default function PackPoliticaPage() {
             um infoproduto ou vender como afiliado. Você recebe o material <b>e</b> o caminho para
             começar.
           </Lead>
-          <motion.div variants={sceneRise} className="mt-7">
+          <motion.div variants={sceneRise} className="mt-7 max-[820px]:mt-6">
             <CTAButton href="#planos">Quero acesso ao pack</CTAButton>
           </motion.div>
           <motion.p variants={sceneRise} className="mt-3.5 text-[13px] text-[#9a948a]">
@@ -90,7 +90,7 @@ export default function PackPoliticaPage() {
       </Scene>
 
       {/* 2b. ENTREGÁVEL TANGÍVEL */}
-      <section className="py-20 md:py-24">
+      <section className="py-24 max-[820px]:py-14">
         <div className="pp-wrap">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -119,7 +119,7 @@ export default function PackPoliticaPage() {
       </section>
 
       {/* 3. O que vem dentro — split com mockup */}
-      <section className="py-20 md:py-24">
+      <section className="py-24 max-[820px]:py-14">
         <div className="pp-wrap grid grid-cols-1 items-center gap-12 md:grid-cols-[0.8fr_1.2fr] md:gap-14">
           <PhoneMockup />
           <motion.div
@@ -148,7 +148,7 @@ export default function PackPoliticaPage() {
       </section>
 
       {/* 3b. ANTES x DEPOIS */}
-      <section className="bg-[#0d0d11] py-20 md:py-24">
+      <section className="bg-[#0d0d11] py-24 max-[820px]:py-14">
         <div className="pp-wrap">
           <Kicker>Por que o pack</Kicker>
           <H2>
@@ -160,7 +160,7 @@ export default function PackPoliticaPage() {
       </section>
 
       {/* 3c. A OPORTUNIDADE */}
-      <section className="py-20 md:py-24">
+      <section className="py-24 max-[820px]:py-14">
         <div className="pp-wrap">
           <Kicker>A oportunidade</Kicker>
           <H2>
@@ -228,7 +228,7 @@ export default function PackPoliticaPage() {
       </Scene>
 
       {/* 6. Planos */}
-      <section id="planos" className="scroll-mt-20 py-20 md:py-24">
+      <section id="planos" className="scroll-mt-20 py-24 max-[820px]:py-14">
         <div className="pp-wrap">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -250,7 +250,7 @@ export default function PackPoliticaPage() {
       </section>
 
       {/* 7. Como recebo */}
-      <section className="bg-[#0d0d11] py-20 md:py-24">
+      <section className="bg-[#0d0d11] py-24 max-[820px]:py-14">
         <div className="pp-wrap">
           <Kicker>Como funciona</Kicker>
           <H2>
@@ -269,7 +269,7 @@ export default function PackPoliticaPage() {
       </section>
 
       {/* 8. FAQ */}
-      <section className="py-20 md:py-24">
+      <section className="py-24 max-[820px]:py-14">
         <div className="pp-wrap">
           <FAQAccordion />
         </div>

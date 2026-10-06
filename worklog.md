@@ -61,3 +61,71 @@ Stage Summary:
 - Page live at `/` (port 3000), all sections rendering with the requested vibe-coding animations (magnetic buttons, parallax scenes, marquee, count-up, pulse glows, sweep shines, spring-based accordion).
 - Sticky footer + sticky countdown bar + mobile sticky floating CTA all confirmed working.
 - Single small bug fixed during verification: floating CTA now uses scroll-position trigger instead of `whileInView`.
+
+---
+Task ID: 2
+Agent: main (Z.ai Code)
+Task: Apply the new responsive base (pack-politica-imersivo (3).html) while keeping all vibe-coding animations.
+
+Work Log:
+- Read new HTML at `upload/pack-politica-imersivo (3).html`. Key differences from previous base:
+  - Background images are now actual `<img>/<picture>` elements (with `object-fit:cover`) instead of CSS `background-image`.
+  - Hero on mobile (max-width:820px): `<picture>` is a separate block on top with explicit height (`62svh; min-height:380px; max-height:560px`), text overlaps the bottom via `margin-top:-84px` — image is no longer a full-bleed background hiding text on small screens.
+  - Mobile-specific typography: h1 `clamp(34px,10.4vw,48px)`, h2 `clamp(28px,8.6vw,40px)`, kicker `11px/0.16em`, lead `17px`, bar `11.5px/1.35`.
+  - Phone smaller on mobile (`min(260px,76vw)`), badges smaller (`11px/p-2.5`), training modules grid `48px 1fr/gap-3` with `34px` number.
+  - Plans stack to 1 column, price `54px` on mobile, plan padding reduced.
+  - Section padding `96px 0` desktop / `56px 0` mobile, scene min-height `88svh` on mobile.
+  - `html,body { overflow-x:hidden }`, `img { max-width:100% }`, safe-area insets for notched devices.
+  - `92svh` (small viewport height) instead of `92vh` to handle mobile browser chrome.
+  - Second breakpoint at `max-width:360px` for very small screens.
+- Refactored `Scene.tsx`:
+  - Now renders `<motion.img>` for non-hero scenes and `<picture><motion.img></picture>` for the hero (with optional `mobileImage` for the `<source media="(max-width:820px)">`).
+  - Preserved framer-motion parallax (`y`/`scale` via `useScroll`/`useTransform`).
+  - Added `variant="hero"` that triggers the new mobile image-on-top + text-overlap layout via CSS.
+- Rewrote `globals.css`:
+  - Added `@layer components { ... }` block containing ALL custom scene/hero CSS — discovered Tailwind 4 was silently dropping unlayered CSS rules (verified by inspecting served CSS: `.pp-scene`, `.pp-hero`, `.pp-overlay`, `.pp-fade`, `.pp-bg`, `.pp-scene-content`, `.pp-hero-picture`, plus `@media (max-width:820px)` and `@media (max-width:360px)` blocks were ALL missing from the served stylesheet).
+  - After wrapping in `@layer components`, all rules are correctly served (verified by re-fetching the CSS file).
+  - Added the `.pp-hero .pp-hero-picture { height:62svh; min-height:380px; max-height:560px; overflow:hidden }` rule plus the `::after` fade gradient and the `> .pp-bg { object-position:center 22% }` rule for the mobile hero image crop.
+  - Added the `.pp-hero .pp-scene-content { margin-top:-84px; padding-top:0; padding-bottom:48px }` rule for the text-overlap effect.
+  - Kept all scene CSS from the new base (overlay gradients per variant, bottom fade, mobile overlay direction flip, etc.).
+- Updated every child component with mobile-specific Tailwind classes using `max-[820px]:` arbitrary variants (matching the new base's 820px breakpoint, not Tailwind's default 768px `md:`):
+  - `CountdownBar`: `text-[11.5px]`, smaller FlipDigit (`h-[22px] w-[18px] text-[13px]`), `leading-[1.35]` on mobile.
+  - `CTAButton`: `w-full px-[18px] py-[17px]` on mobile.
+  - `PhoneMockup`: `max-w-[260px] w-[76vw]` on mobile.
+  - `FolderCard`: `p-4`, `text-[18px]` title, `text-[12px]` subtitle on mobile.
+  - `Badges` marquee: `px-[11px] py-2 text-[11px]` on mobile; VsBeforeAfter `p-6 px-5 text-[20px]/[14px]` on mobile.
+  - `Paths`: `text-[44px]` number, `text-[22px]` title, `text-[15px]` body on mobile.
+  - `TrainingModules`: grid `48px 1fr gap-3`, `text-[34px]` number, `text-[20px]/[14px]` text on mobile.
+  - `Plans`: stack to 1 column, `py-6 px-0` padding, `text-[54px]` price on mobile.
+  - `FAQAccordion`: `text-[clamp(24px,7vw,32px)]` title, `text-[17px] py-4 pr-6` summary on mobile.
+  - `AnimatedChecklist`: `text-[15px]` items, `h-5 w-5 text-[12px]` check glyph on mobile.
+- Updated `page.tsx`:
+  - Hero Scene now uses `variant="hero"` with `mobileImage={IMG.heroM}` — switches to the tighter mobile crop on screens ≤820px.
+  - Hero h1 uses `max-[820px]:text-[clamp(34px,10.4vw,48px)] max-[360px]:text-[32px]`.
+  - All section paddings changed from `py-20 md:py-24` to `py-24 max-[820px]:py-14` (96px desktop / 56px mobile, matching new base).
+- Fixed `AnimatedCounter`:
+  - Added `decimals` prop and pt-BR formatting via `toLocaleString('pt-BR', { minimumFractionDigits: decimals })`.
+  - Plans now display `R$ 14,90` and `R$ 39,90` (previously rounded to R$ 15 / R$ 40).
+  - Wrapped output in `motion.span` for smooth opacity fade-in.
+- Fixed React warning `Invalid DOM property fetchpriority → fetchPriority`.
+
+Verification (Agent Browser + VLM):
+- Mobile (390×844): hero now renders with image at TOP (523px tall, verified via JS: `display:block, position:relative, height:523px, min-height:380px, max-height:560px`) and headline+CTA BELOW the image with the text-overlap effect. ✓
+- Mobile VS section: 2 columns stack vertically, readable. ✓
+- Mobile Plans: stacked vertically, prices shown as "R$ 14,90" and "R$ 39,90" with the "MAIS ESCOLHIDO" badge. ✓
+- Mobile FAQ accordion: still works (clicked 2nd item, it opened and 1st closed). ✓
+- Very small mobile (360×740): page still readable, breakpoint works. ✓
+- Tablet (768×1024): hero renders with full-bleed masked character image, headline visible. ✓
+- Desktop (1440×900): hero renders with masked character on the right, full headline + amber CTA visible. ✓
+- Floating mobile CTA still appears after 600px scroll (verified: `top:761, opacity:1`). ✓
+- Sticky footer at bottom (`mt-auto` on footer, parent `flex flex-col min-h-screen`). ✓
+- All 5 CTA links + 6 FAQ buttons present and interactive on mobile. ✓
+- Lint clean.
+- Root cause of broken mobile hero: Tailwind 4 was silently dropping all my custom CSS rules that weren't inside `@layer`. Wrapping them in `@layer components { ... }` fixed it. This is the key learning.
+
+Stage Summary:
+- New responsive base applied. Mobile hero now uses the image-on-top + text-overlap layout (image no longer hides text).
+- All breakpoints honored: 820px (mobile) and 360px (tiny screens), with svh units, safe-area insets, and smaller typography.
+- Prices now show decimals correctly (R$ 14,90 / R$ 39,90).
+- All previous vibe-coding animations preserved (magnetic buttons, parallax, marquee, count-up, accordion, glow ring on the highlighted plan, sticky countdown bar, floating mobile CTA, etc.).
+- Verified at 360, 390, 768, 1440 viewports.

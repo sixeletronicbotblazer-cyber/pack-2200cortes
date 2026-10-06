@@ -59,7 +59,7 @@ export function Plans() {
             damping: 16,
             delay: i * 0.12,
           }}
-          className={`group relative overflow-hidden border-t-[3px] p-7 ${
+          className={`group relative overflow-hidden border-t-[3px] p-7 max-[820px]:py-6 max-[820px]:px-0 ${
             plan.highlighted
               ? 'border-t-[#f5a524] bg-gradient-to-b from-[#1a0b0e] to-[#0d0d11]'
               : 'border-t-[#3a3a42] bg-[#0d0d11]'
@@ -106,7 +106,8 @@ export function Plans() {
               <AnimatedCounter
                 to={plan.price}
                 duration={1.6}
-                className="font-display text-[64px] font-bold leading-none tabular-nums"
+                decimals={2}
+                className="font-display text-[64px] font-bold leading-none tabular-nums max-[820px]:text-[54px]"
               />
             </div>
 

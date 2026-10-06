@@ -41,7 +41,7 @@ export function FAQAccordion() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ type: 'spring', stiffness: 100, damping: 16 }}
-        className="mb-7 font-display text-[clamp(28px,4vw,48px)] font-bold leading-tight"
+        className="mb-7 font-display text-[clamp(28px,4vw,48px)] font-bold leading-tight max-[820px]:text-[clamp(24px,7vw,32px)]"
       >
         Dúvidas
       </motion.h2>
@@ -56,10 +56,10 @@ export function FAQAccordion() {
             >
               <button
                 onClick={() => setOpen(isOpen ? null : i)}
-                className="flex w-full items-center justify-between gap-4 py-5 text-left"
+                className="flex w-full items-center justify-between gap-4 py-5 text-left max-[820px]:py-4"
                 aria-expanded={isOpen}
               >
-                <span className="text-[19px] font-semibold text-[#f3efe8]">
+                <span className="text-[19px] font-semibold text-[#f3efe8] max-[820px]:pr-6 max-[820px]:text-[17px]">
                   {item.q}
                 </span>
                 <motion.span

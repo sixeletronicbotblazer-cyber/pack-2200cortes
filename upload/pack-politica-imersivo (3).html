@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pack Política: +5 mil cortes para criar conteúdo e buscar suas primeiras vendas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ===== CONFIGURAÇÃO: troque aqui os links e as imagens (baixe as imagens do Higgsfield e hospede no seu projeto) ===== */
+:root{
+  --cdn:"https://d8j0ntlcm91z4.cloudfront.net/user_36U380bZTAtVPkVynbGYAmiPX5F/";
+  --img-hero:url("https://d8j0ntlcm91z4.cloudfront.net/user_36U380bZTAtVPkVynbGYAmiPX5F/hf_20261006_223935_4102cda4-738f-467e-94c3-227b39d1d1a0.png");
+  --img-hero-m:url("https://d8j0ntlcm91z4.cloudfront.net/user_36U380bZTAtVPkVynbGYAmiPX5F/hf_20261006_223934_ef3d11c0-93fd-4885-9ab6-2da04917f71b.png");
+  --img-lados:url("https://d8j0ntlcm91z4.cloudfront.net/user_36U380bZTAtVPkVynbGYAmiPX5F/hf_20261006_223935_85b1c577-135a-41ab-b956-db9142ff0892.png");
+  --img-fios:url("https://d8j0ntlcm91z4.cloudfront.net/user_36U380bZTAtVPkVynbGYAmiPX5F/hf_20261006_223933_de1bb94d-b21d-4849-b914-9482ef3e77c9.png");
+  --img-criador:url("https://d8j0ntlcm91z4.cloudfront.net/user_36U380bZTAtVPkVynbGYAmiPX5F/hf_20261006_223934_63580822-f1cc-4da4-8f3c-ec8769f31276.png");
+  --red:#e11d2e; --amber:#f5a524; --ink:#07070a; --paper:#f3efe8;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--paper);font-family:Inter,system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.cond{font-family:Oswald,Impact,"Arial Narrow",sans-serif;text-transform:uppercase;line-height:1.02;letter-spacing:.01em}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+.bar{background:var(--red);color:#fff;text-align:center;font:600 13px Inter;padding:9px 12px;letter-spacing:.04em}
+.bar b{font-variant-numeric:tabular-nums}
+/* cenas de tela cheia: a imagem É a seção, o texto vive em cima dela */
+.scene{position:relative;min-height:92vh;display:flex;align-items:center;background-size:cover;background-position:center;isolation:isolate}
+.scene::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(7,7,10,.92) 0%,rgba(7,7,10,.55) 55%,rgba(7,7,10,.15) 100%)}
+.scene::after{content:"";position:absolute;left:0;right:0;bottom:0;height:140px;z-index:-1;background:linear-gradient(transparent,var(--ink))}
+.hero{background-image:var(--img-hero);background-position:70% center}
+.lados{background-image:var(--img-lados)}
+.fios{background-image:var(--img-fios)}
+.criador{background-image:var(--img-criador)}
+.center::before{background:radial-gradient(ellipse at center,rgba(7,7,10,.55),rgba(7,7,10,.9))}
+.kicker{display:inline-block;color:var(--amber);font:600 12px Inter;letter-spacing:.22em;text-transform:uppercase;margin-bottom:16px}
+h1{font-size:clamp(40px,7.2vw,92px);max-width:11.5em}
+h1 em,h2 em{font-style:normal;color:var(--red)}
+h2{font-size:clamp(32px,5.4vw,66px);max-width:12em}
+p.lead{font-size:clamp(17px,2vw,21px);max-width:34em;margin:20px 0 28px;color:#d8d3ca}
+.btn{display:inline-block;background:var(--amber);color:#150d00;font:700 17px Oswald,sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:18px 34px;border-radius:4px;text-decoration:none;box-shadow:0 0 0 0 rgba(245,165,36,.6);animation:pulse 2.4s infinite}
+.btn.red{background:var(--red);color:#fff}
+@keyframes pulse{70%{box-shadow:0 0 0 16px rgba(245,165,36,0)}100%{box-shadow:0 0 0 0 rgba(245,165,36,0)}}
+.small{font-size:13px;color:#9a948a;margin-top:14px}
+section.pad{padding:96px 0}
+.split{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:56px;align-items:center}
+/* mockup: celular com o vídeo em DOIS CORTES empilhados */
+.phone{width:min(300px,100%);margin:0 auto;aspect-ratio:9/19;border-radius:38px;border:7px solid #1b1b20;background:#000;overflow:hidden;position:relative;box-shadow:0 30px 90px rgba(225,29,46,.35)}
+.phone .cut{position:absolute;left:0;right:0;height:50%;background-size:cover}
+.phone .c1{top:0;background-image:var(--img-hero-m);background-position:center 70%}
+.phone .c2{bottom:0;background-image:var(--img-lados);background-position:center}
+.phone .cap{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:700 26px Oswald;text-transform:uppercase;text-shadow:0 2px 8px #000;z-index:2}
+.phone .cap b{color:var(--amber)}
+.phone .play{position:absolute;right:14px;bottom:14px;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.9);z-index:2;display:grid;place-items:center;color:#000;font-size:18px;padding-left:3px}
+.phone::after{content:"";position:absolute;left:0;right:0;top:calc(50% - 1px);height:2px;background:var(--red);z-index:1}
+ul.chk{list-style:none;padding:0;display:grid;gap:14px;margin-top:22px}
+ul.chk li{padding-left:34px;position:relative;font-size:18px}
+ul.chk li::before{content:"✓";position:absolute;left:0;top:-1px;width:24px;height:24px;border-radius:50%;background:var(--red);color:#fff;font-size:14px;display:grid;place-items:center}
+.mods{counter-reset:m;margin-top:40px}
+.mod{display:grid;grid-template-columns:64px 1fr;gap:18px;padding:22px 0;border-top:1px solid #2a2a30}
+.mod::before{counter-increment:m;content:"0" counter(m);font:700 44px Oswald;color:var(--red)}
+.mod h3{font-size:24px;margin-bottom:4px}
+.mod p{color:#b9b3a9}
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:44px}
+.plan{border-top:3px solid #3a3a42;padding:30px 4px}
+.plan.top{border-color:var(--amber)}
+.plan .tag{font:600 12px Inter;letter-spacing:.2em;color:var(--amber);text-transform:uppercase}
+.price{font:700 64px Oswald;margin:8px 0}
+.price small{font-size:18px;color:#9a948a;font-weight:500}
+.plan ul{padding-left:18px;color:#cfc9bf;display:grid;gap:8px;margin:14px 0 26px}
+details{border-bottom:1px solid #2a2a30;padding:20px 0}
+summary{cursor:pointer;font:600 19px Inter;list-style:none}
+summary::after{content:"+";float:right;color:var(--amber)}
+details[open] summary::after{content:"–"}
+details p{margin-top:12px;color:#b9b3a9}
+footer{padding:54px 0 90px;color:#7d786f;font-size:13px;text-align:center}
+@media(max-width:820px){
+  .hero{background-image:var(--img-hero-m);background-position:center top;align-items:flex-end;padding-bottom:40px}
+  .scene::before{background:linear-gradient(0deg,rgba(7,7,10,.95) 25%,rgba(7,7,10,.2) 100%)}
+  .split,.plans{grid-template-columns:1fr}
+  .btn{display:block;text-align:center}
+  section.pad{padding:64px 0}
+}
+@media(prefers-reduced-motion:reduce){.btn{animation:none}}
+
+/* ===== novos blocos: entregável tangível, antes×depois, 3 caminhos ===== */
+.folders{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:34px 0}
+.folder{border:1px solid #2f2f36;border-left:4px solid var(--red);padding:18px 18px 16px;background:linear-gradient(180deg,#101015,#0a0a0d)}
+.folder b{display:block;font:700 22px Oswald;text-transform:uppercase}
+.folder span{font-size:13px;color:#9a948a}
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.badges i{font:600 13px Inter;font-style:normal;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--amber);color:var(--amber);padding:9px 14px;border-radius:999px}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:36px}
+.vs>div{padding:30px 28px}
+.vs .bad{background:#0f0f13;border-top:3px solid #4a4a52}
+.vs .good{background:#1a0b0e;border-top:3px solid var(--red)}
+.vs h3{font-size:24px;margin-bottom:14px}
+.vs ul{list-style:none;padding:0;display:grid;gap:12px}
+.vs .bad li::before{content:"✕  ";color:#777}
+.vs .good li::before{content:"✓  ";color:var(--amber)}
+.paths{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:40px;border-top:1px solid #2a2a30}
+.path{padding:30px 26px 10px 0}
+.path+.path{padding-left:26px;border-left:1px solid #2a2a30}
+.path em{font:700 54px Oswald;color:var(--red);font-style:normal}
+.path h3{font-size:25px;margin:4px 0 8px}
+.path p{color:#b9b3a9}
+@media(max-width:820px){
+  .folders,.vs,.paths{grid-template-columns:1fr}
+  .path,.path+.path{padding:22px 0;border-left:0;border-top:1px solid #2a2a30}
+}
+
+/* ===== AJUSTES MOBILE ===== */
+html,body{overflow-x:hidden;max-width:100%}
+img{max-width:100%}
+.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;display:block}
+.scene{background-color:#0b0b10;min-height:92vh;min-height:92svh}
+.phone .cut{position:absolute;left:0;right:0;height:50%;overflow:hidden}
+.phone .cut:first-child{top:0}.phone .cut:nth-child(2){bottom:0}
+.phone .cut img{width:100%;height:100%;object-fit:cover;display:block}
+.wrap{padding-left:max(22px,env(safe-area-inset-left));padding-right:max(22px,env(safe-area-inset-right))}
+h1,h2,.lead,p,li{overflow-wrap:break-word;hyphens:manual}
+@media(max-width:820px){
+  .wrap{padding-left:max(20px,env(safe-area-inset-left));padding-right:max(20px,env(safe-area-inset-right))}
+  .scene{min-height:88svh;padding:56px 0 64px}
+  .hero{align-items:flex-end}
+  .hero .bg{object-position:center top!important}
+  .lados .bg,.criador .bg,.fios .bg{object-position:center!important}
+  h1{font-size:clamp(34px,10.4vw,48px);max-width:none}
+  h2{font-size:clamp(28px,8.6vw,40px);max-width:none}
+  p.lead{font-size:17px;margin:16px 0 24px}
+  .kicker{font-size:11px;letter-spacing:.16em}
+  .bar{font-size:11.5px;padding:8px 14px;line-height:1.35}
+  .btn{padding:17px 18px;font-size:16px;width:100%}
+  .phone{width:min(260px,76vw)}
+  .badges i{font-size:11px;padding:8px 11px}
+  .vs>div{padding:24px 20px}
+  .mod{grid-template-columns:48px 1fr;gap:12px}
+  .mod::before{font-size:34px}
+  .price{font-size:54px}
+  .plan{padding:26px 0}
+  summary{font-size:17px;padding-right:24px}
+}
+@media(max-width:360px){h1{font-size:32px}h2{font-size:27px}.folders{gap:10px}}
+
+/* ===== HERO MOBILE: imagem em cima, texto embaixo (a imagem não fica atrás do texto) ===== */
+@media(max-width:820px){
+  .hero{display:block;min-height:0;padding:0}
+  .hero::before,.hero::after{display:none}
+  .hero picture{display:block;position:relative;height:62svh;min-height:380px;max-height:560px;overflow:hidden}
+  .hero picture::after{content:"";position:absolute;left:0;right:0;bottom:0;height:55%;background:linear-gradient(transparent,var(--ink))}
+  .hero .bg{position:relative!important;inset:auto;z-index:0;width:100%;height:100%;object-fit:cover;object-position:center 22%!important}
+  .hero .wrap{position:relative;z-index:1;margin-top:-84px;padding-bottom:48px}
+  .scene:not(.hero){padding:72px 0}
+  .scene:not(.hero)::before{background:linear-gradient(0deg,rgba(7,7,10,.9) 0%,rgba(7,7,10,.62) 55%,rgba(7,7,10,.4) 100%)}
+  .scene.center::before{background:rgba(7,7,10,.6)}
+  .scene::after{height:70px}
+  section.pad{padding:56px 0}
+}
+</style>
+</head>
+<body>
+
+<div class="bar">⚡ 2º TURNO EM 25/10/2026 · A JANELA FECHA EM <b id="cd">--d --h --m</b> · só volta daqui a 4 anos</div>
+
+<!-- 1. HERO: o personagem mascarado é o "sistema" -->
+<header class="scene hero">
+  <picture><source media="(max-width:820px)" srcset="https://d8j0ntlcm91z4.cloudfront.net/user_36U380bZTAtVPkVynbGYAmiPX5F/hf_20261006_223934_ef3d11c0-93fd-4885-9ab6-2da04917f71b.png"><img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_36U380bZTAtVPkVynbGYAmiPX5F/hf_20261006_223935_4102cda4-738f-467e-94c3-227b39d1d1a0.png" alt="" decoding="async" fetchpriority="high" style="object-position:70% center" onerror="this.style.display='none'"></picture>
+  <div class="wrap">
+    <span class="kicker">Pack Política · acesso vitalício</span>
+    <h1>+5 mil cortes de política para criar conteúdo e <em>buscar suas primeiras vendas</em></h1>
+    <p class="lead">Escolha os cortes, monte seus vídeos e siga o treinamento para criar sua conta, oferecer um infoproduto ou vender como afiliado. Você recebe o material <b>e</b> o caminho para começar.</p>
+    <a class="btn" href="#planos">Quero acesso ao pack</a>
+    <p class="small">Entrega por link do Google Drive · garantia de 7 dias</p>
+  </div>
+</header>
+
+<!-- 2. A virada: o sistema quer você dividido; você pode lucrar com a atenção -->
+<section class="scene lados">
+  <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_36U380bZTAtVPkVynbGYAmiPX5F/hf_20261006_223935_85b1c577-135a-41ab-b956-db9142ff0892.png" alt="" loading="eager" decoding="async" style="object-position:center" onerror="this.style.display='none'">
+  <div class="wrap">
+    <span class="kicker">Enquanto todo mundo escolhe um lado</span>
+    <h2>O sistema precisa que você <em>brigue</em>. A atenção gerada vira <em>audiência</em>.</h2>
+    <p class="lead">Política mexe com paixão e prende gente. De quatro em quatro anos o assunto toma conta do feed, e quem tem vídeo pronto na hora publica enquanto os outros ainda estão procurando material.</p>
+  </div>
+</section>
+
+<!-- 2b. ENTREGÁVEL TANGÍVEL: o Drive aberto -->
+<section class="pad">
+  <div class="wrap">
+    <span class="kicker">Veja o que cai no seu Drive</span>
+    <h2>Abriu o Drive, achou o corte, <em>arrastou pra timeline.</em></h2>
+    <p class="lead">Nada de garimpar live de 3 horas. Os cortes já vêm separados por tema e momento, em vertical, prontos para editar.</p>
+    <!-- TROCAR: substitua pelos nomes reais das suas pastas e, se quiser, coloque a quantidade em <span> -->
+    <div class="folders">
+      <div class="folder"><b>Debates</b><span>cenas de confronto</span></div>
+      <div class="folder"><b>Discursos</b><span>falas fortes</span></div>
+      <div class="folder"><b>Reações</b><span>momentos de impacto</span></div>
+      <div class="folder"><b>Polêmicas</b><span>assuntos do dia</span></div>
+      <div class="folder"><b>Bastidores</b><span>cenas de bastidor</span></div>
+      <div class="folder"><b>Entrevistas</b><span>trechos para cortar</span></div>
+    </div>
+    <div class="badges"><i>+5 mil cortes</i><i>Vertical 9:16</i><i>Sem marca d'água</i><i>Download no celular ou PC</i><i>CapCut · Premiere · DaVinci</i></div>
+    <!-- IMAGEM: print/mockup da pasta do Drive aberta com os cortes em miniatura -->
+  </div>
+</section>
+
+<!-- 3. O que vem dentro: mockup em dois cortes -->
+<section class="pad">
+  <div class="wrap split">
+    <div class="phone" role="img" aria-label="Exemplo de corte vertical em dois cortes empilhados">
+      <div class="cut"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_36U380bZTAtVPkVynbGYAmiPX5F/hf_20261006_223934_ef3d11c0-93fd-4885-9ab6-2da04917f71b.png" alt="" loading="lazy" style="object-position:center 70%"></div><div class="cut"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_36U380bZTAtVPkVynbGYAmiPX5F/hf_20261006_223935_85b1c577-135a-41ab-b956-db9142ff0892.png" alt="" loading="lazy"></div>
+      <div class="cap">Seu <b>corte</b><br>pronto</div>
+      <div class="play">▶</div>
+    </div>
+    <div>
+      <span class="kicker">O que você recebe</span>
+      <h2>Cortes prontos. Você só <em>arrasta e publica</em>.</h2>
+      <ul class="chk">
+        <li>Mais de 5 mil cortes verticais organizados por tema e momento</li>
+        <li>Pastas no Google Drive: ache a cena em segundos</li>
+        <li>Funciona no CapCut, Premiere, DaVinci ou qualquer editor</li>
+        <li>Acesso vitalício: compre uma vez</li>
+        <li>Treinamento passo a passo (abaixo)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 3b. ANTES x DEPOIS -->
+<section class="pad" style="background:#0d0d11">
+  <div class="wrap">
+    <span class="kicker">Por que o pack</span>
+    <h2>A diferença entre <em>garimpar</em> e <em>editar hoje mesmo</em></h2>
+    <div class="vs">
+      <div class="bad"><h3>Do jeito difícil</h3><ul>
+        <li>Baixar live de horas para aproveitar 3 segundos</li>
+        <li>Garimpar material bruto antes de começar a editar</li>
+        <li>Converter, recortar e ajustar cada arquivo</li>
+        <li>Perder o dia inteiro para entregar um vídeo</li></ul></div>
+      <div class="good"><h3>Com o Pack Política</h3><ul>
+        <li>Abre a pasta do tema e escolhe o corte</li>
+        <li>Cena já em vertical, pronta para a timeline</li>
+        <li>Edita, legenda e posta no mesmo dia</li>
+        <li>Mais vídeos publicados na mesma semana</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3c. A OPORTUNIDADE: três caminhos -->
+<section class="pad">
+  <div class="wrap">
+    <span class="kicker">A oportunidade</span>
+    <h2>Um público <em>engajado</em>. Três jeitos de transformar atenção em renda.</h2>
+    <p class="lead">Política mobiliza gente de verdade, e a cada eleição o assunto toma conta do feed. Quem tem material pronto na hora publica mais e aparece primeiro.</p>
+    <div class="paths">
+      <div class="path"><em>01</em><h3>Viralizar</h3><p>Poste cortes em Instagram, TikTok e Shorts e construa audiência com volume e velocidade.</p></div>
+      <div class="path"><em>02</em><h3>Vender cortes</h3><p>Use o material para criar e oferecer conteúdo para páginas, perfis e criadores do nicho.</p></div>
+      <div class="path"><em>03</em><h3>Infoprodutos e afiliação</h3><p>Leve essa audiência para uma oferta sua ou para produtos de afiliado ligados ao tema.</p></div>
+    </div>
+    <p class="small">O pack entrega o material e o treinamento mostra o caminho. Os resultados dependem da sua execução e do mercado, e não há garantia de ganhos.</p>
+    <p style="margin-top:28px"><a class="btn" href="#planos">Quero começar agora</a></p>
+  </div>
+</section>
+
+<!-- 4. Treinamento -->
+<section class="scene criador">
+  <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_36U380bZTAtVPkVynbGYAmiPX5F/hf_20261006_223934_63580822-f1cc-4da4-8f3c-ec8769f31276.png" alt="" loading="eager" decoding="async" style="object-position:center" onerror="this.style.display='none'">
+  <div class="wrap">
+    <span class="kicker">Treinamento incluso</span>
+    <h2>Do corte à <em>primeira venda</em>: o caminho completo</h2>
+    <div class="mods">
+      <div class="mod"><div><h3>Como criar um infoproduto</h3><p>Do zero, com o que você já tem em mãos.</p></div></div>
+      <div class="mod"><div><h3>Página de vendas simples</h3><p>O que oferecer e como apresentar.</p></div></div>
+      <div class="mod"><div><h3>O que vender nesta reta final</h3><p>Ideias de oferta e de afiliação ligadas ao tema.</p></div></div>
+      <div class="mod"><div><h3>Contas no Instagram, TikTok e YouTube Shorts</h3><p>Como abrir e organizar sua presença.</p></div></div>
+      <div class="mod"><div><h3>Como divulgar seus links</h3><p>Onde colocar e como chamar para a ação.</p></div></div>
+      <div class="mod"><div><h3>Vídeos animados com IA no Flow</h3><p>Crie cenas próprias para complementar os cortes.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Escassez real -->
+<section class="scene fios center" style="min-height:70vh;text-align:center">
+  <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_36U380bZTAtVPkVynbGYAmiPX5F/hf_20261006_223933_de1bb94d-b21d-4849-b914-9482ef3e77c9.png" alt="" loading="eager" decoding="async" style="object-position:center" onerror="this.style.display='none'">
+  <div class="wrap">
+    <span class="kicker">A janela não é eterna</span>
+    <h2 style="margin:0 auto">Fanatismo dá audiência. E <em>só volta em 4 anos</em>.</h2>
+    <p class="lead" style="margin:20px auto 28px">O 2º turno é em 25/10/2026. Depois disso, a atenção cai. Quem quiser aproveitar o momento precisa começar agora.</p>
+    <a class="btn red" href="#planos">Ver os planos</a>
+  </div>
+</section>
+
+<!-- 6. Planos -->
+<section class="pad" id="planos">
+  <div class="wrap">
+    <span class="kicker">Ofertas</span>
+    <h2>Pagamento único. <em>Acesso vitalício.</em></h2>
+    <div class="plans">
+      <div class="plan">
+        <span class="tag">Inicial</span>
+        <div class="price">R$ 14,90</div>
+        <ul><li>300 cortes de política</li><li>Acesso pelo Google Drive</li><li>Formato vertical pronto</li><li>Acesso vitalício</li></ul>
+        <a class="btn red" href="#CHECKOUT_INICIAL">Quero o Inicial</a>
+      </div>
+      <div class="plan top">
+        <span class="tag">Completo · mais escolhido</span>
+        <div class="price">R$ 39,90</div>
+        <ul><li><b>+5 mil cortes</b> de política</li><li>Treinamento completo: infoproduto, página, afiliação, contas e divulgação</li><li>Vídeos com IA no Flow</li><li>Acesso vitalício</li></ul>
+        <a class="btn" href="#CHECKOUT_COMPLETO">Quero o Completo</a>
+      </div>
+    </div>
+    <p class="small" style="text-align:center;margin-top:34px">Garantia incondicional de 7 dias. Não garantimos resultado financeiro: o resultado depende do seu esforço, da sua divulgação e do mercado.</p>
+  </div>
+</section>
+
+<!-- 7. Como recebo -->
+<section class="pad" style="background:#0d0d11">
+  <div class="wrap">
+    <span class="kicker">Como funciona</span>
+    <h2>Pagou, recebeu o <em>link do Drive</em></h2>
+    <ul class="chk">
+      <li>Pagamento confirmado: o acesso é liberado</li>
+      <li>Abra o link do Google Drive no celular ou no computador</li>
+      <li>Escolha os cortes e monte seu vídeo</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 8. FAQ -->
+<section class="pad">
+  <div class="wrap" style="max-width:760px">
+    <h2 style="margin-bottom:30px">Dúvidas</h2>
+    <details><summary>Qual a diferença entre o Inicial e o Completo?</summary><p>O Inicial traz 300 cortes. O Completo traz mais de 5 mil cortes e o treinamento.</p></details>
+    <details><summary>Como recebo?</summary><p>Por link do Google Drive, liberado após o pagamento.</p></details>
+    <details><summary>Posso usar em qualquer editor?</summary><p>Sim. CapCut, Premiere, DaVinci ou qualquer outro.</p></details>
+    <details><summary>Isso garante que vou vender?</summary><p>Não. O pack e o treinamento dão material e caminho; o resultado depende de você.</p></details>
+    <details><summary>E se eu não gostar?</summary><p>Você tem 7 dias de garantia.</p></details>
+  </div>
+</section>
+
+<footer><div class="wrap">Material de apoio para criação de conteúdo. Sem vínculo com partidos, candidatos ou órgãos públicos. Sem promessa de ganho.<br>© 2026 Pack Política · Termos · Privacidade</div></footer>
+
+<script>
+(function(){
+  var end=new Date("2026-10-25T17:00:00-03:00").getTime(), el=document.getElementById("cd");
+  function t(){var d=Math.max(0,end-Date.now()),D=Math.floor(d/864e5),H=Math.floor(d%864e5/36e5),M=Math.floor(d%36e5/6e4);
+    el.textContent=D+"d "+H+"h "+M+"m";}
+  t(); setInterval(t,30000);
+})();
+</script>
+</body>
+</html>

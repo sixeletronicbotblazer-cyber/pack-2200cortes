@@ -25,9 +25,9 @@ export function AnimatedChecklist({ items, stagger = 0.1, className }: Props) {
             damping: 18,
             delay: i * stagger,
           }}
-          className="relative flex items-start gap-3 pl-[34px] text-[18px]"
+          className="relative flex items-start gap-3 pl-[34px] text-[18px] max-[820px]:text-[15px]"
         >
-          <span className="absolute left-0 top-[-1px] grid h-6 w-6 place-items-center rounded-full bg-[#e11d2e] text-[14px] font-bold text-white">
+          <span className="absolute left-0 top-[-1px] grid h-6 w-6 place-items-center rounded-full bg-[#e11d2e] text-[14px] font-bold text-white max-[820px]:h-5 max-[820px]:w-5 max-[820px]:text-[12px]">
             ✓
           </span>
           <span className="text-[#e7e2d8]">{item}</span>

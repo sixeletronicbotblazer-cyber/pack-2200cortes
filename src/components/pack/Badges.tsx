@@ -21,7 +21,7 @@ export function BadgesMarquee() {
         {items.map((b, i) => (
           <span
             key={i}
-            className="whitespace-nowrap rounded-full border border-[#f5a524] px-3.5 py-2 text-[13px] font-semibold uppercase tracking-[0.06em] text-[#f5a524]"
+            className="whitespace-nowrap rounded-full border border-[#f5a524] px-3.5 py-2 text-[13px] font-semibold uppercase tracking-[0.06em] text-[#f5a524] max-[820px]:px-[11px] max-[820px]:py-2 max-[820px]:text-[11px]"
           >
             {b}
           </span>
@@ -39,12 +39,12 @@ export function VsBeforeAfter() {
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, margin: '-80px' }}
         transition={{ type: 'spring', stiffness: 90, damping: 16 }}
-        className="border-t-[3px] border-[#4a4a52] bg-[#0f0f13] p-7"
+        className="border-t-[3px] border-[#4a4a52] bg-[#0f0f13] p-7 max-[820px]:p-6 max-[820px]:px-5"
       >
-        <h3 className="mb-3 font-display text-[24px] font-bold uppercase">
+        <h3 className="mb-3 font-display text-[24px] font-bold uppercase max-[820px]:text-[20px]">
           Do jeito difícil
         </h3>
-        <ul className="grid gap-3 text-[#b9b3a9]">
+        <ul className="grid gap-3 text-[#b9b3a9] max-[820px]:text-[14px]">
           {[
             'Baixar live de horas para aproveitar 3 segundos',
             'Garimpar material bruto antes de começar a editar',
@@ -71,7 +71,7 @@ export function VsBeforeAfter() {
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, margin: '-80px' }}
         transition={{ type: 'spring', stiffness: 90, damping: 16 }}
-        className="relative border-t-[3px] border-[#e11d2e] bg-[#1a0b0e] p-7"
+        className="relative border-t-[3px] border-[#e11d2e] bg-[#1a0b0e] p-7 max-[820px]:p-6 max-[820px]:px-5"
       >
         {/* diagonal glow sweep */}
         <motion.div
@@ -85,10 +85,10 @@ export function VsBeforeAfter() {
           animate={{ backgroundPosition: ['200% 0', '-200% 0'] }}
           transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
         />
-        <h3 className="relative mb-3 font-display text-[24px] font-bold uppercase">
+        <h3 className="relative mb-3 font-display text-[24px] font-bold uppercase max-[820px]:text-[20px]">
           Com o Pack Política
         </h3>
-        <ul className="relative grid gap-3 text-[#d8d3ca]">
+        <ul className="relative grid gap-3 text-[#d8d3ca] max-[820px]:text-[14px]">
           {[
             'Abre a pasta do tema e escolhe o corte',
             'Cena já em vertical, pronta para a timeline',

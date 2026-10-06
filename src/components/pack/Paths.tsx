@@ -36,23 +36,23 @@ export function Paths() {
             delay: i * 0.12,
           }}
           className={`group relative p-6 md:p-7 ${
-            i > 0 ? 'md:border-l md:border-[#2a2a30]' : ''
-          } ${i > 0 ? 'border-t md:border-t-0' : ''} border-[#2a2a30]`}
+            i > 0 ? 'border-t border-[#2a2a30] md:border-t-0 md:border-l' : ''
+          }`}
         >
           {/* hover accent line */}
           <span className="pointer-events-none absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 bg-gradient-to-r from-[#e11d2e] to-[#f5a524] transition-transform duration-500 group-hover:scale-x-100" />
 
           <motion.div
-            className="font-display text-[54px] font-bold leading-none text-[#e11d2e] transition-colors group-hover:text-[#f5a524]"
+            className="font-display text-[54px] font-bold leading-none text-[#e11d2e] transition-colors group-hover:text-[#f5a524] max-[820px]:text-[44px]"
             whileHover={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 280, damping: 18 }}
           >
             {p.num}
           </motion.div>
-          <h3 className="mb-2 mt-1 font-display text-[25px] font-bold uppercase leading-tight">
+          <h3 className="mb-2 mt-1 font-display text-[25px] font-bold uppercase leading-tight max-[820px]:text-[22px]">
             {p.title}
           </h3>
-          <p className="text-[#b9b3a9]">{p.desc}</p>
+          <p className="text-[#b9b3a9] max-[820px]:text-[15px]">{p.desc}</p>
 
           {/* arrow on hover */}
           <motion.div

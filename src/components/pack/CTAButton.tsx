@@ -57,7 +57,7 @@ export function CTAButton({
       onMouseMove={handleMove}
       onMouseLeave={reset}
       className={cn(
-        'group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-[4px] px-8 py-4 font-display text-base font-bold uppercase tracking-[0.06em] no-underline',
+        'group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-[4px] px-8 py-4 font-display text-base font-bold uppercase tracking-[0.06em] no-underline max-[820px]:w-full max-[820px]:px-[18px] max-[820px]:py-[17px] max-[820px]:text-base',
         palette,
         className,
       )}
