@@ -6,7 +6,7 @@ import { CountdownBar } from '@/components/pack/CountdownBar'
 import { CTAButton } from '@/components/pack/CTAButton'
 import { Scene, Kicker, H2, Lead, sceneStagger, sceneRise } from '@/components/pack/Scene'
 import { PhoneMockup } from '@/components/pack/PhoneMockup'
-import { FolderCard } from '@/components/pack/FolderCard'
+import { FoldersMarquee } from '@/components/pack/FolderCard'
 import { BadgesMarquee, VsBeforeAfter } from '@/components/pack/Badges'
 import { AnimatedChecklist } from '@/components/pack/AnimatedChecklist'
 import { Paths } from '@/components/pack/Paths'
@@ -27,14 +27,6 @@ const IMG = {
     'https://d8j0ntlcm91z4.cloudfront.net/user_36U380bZTAtVPkVynbGYAmiPX5F/hf_20261006_223934_63580822-f1cc-4da4-8f3c-ec8769f31276.png',
 }
 
-const FOLDERS = [
-  { title: 'Debates', subtitle: 'cenas de confronto' },
-  { title: 'Discursos', subtitle: 'falas fortes' },
-  { title: 'Reações', subtitle: 'momentos de impacto' },
-  { title: 'Polêmicas', subtitle: 'assuntos do dia' },
-  { title: 'Bastidores', subtitle: 'cenas de bastidor' },
-  { title: 'Entrevistas', subtitle: 'trechos para cortar' },
-]
 
 export default function PackPoliticaPage() {
   const { scrollY } = useScroll()
@@ -108,10 +100,8 @@ export default function PackPoliticaPage() {
             </Lead>
           </motion.div>
 
-          <div className="mt-8 grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
-            {FOLDERS.map((f, i) => (
-              <FolderCard key={f.title} title={f.title} subtitle={f.subtitle} index={i} />
-            ))}
+          <div className="mt-2">
+            <FoldersMarquee />
           </div>
 
           <BadgesMarquee />

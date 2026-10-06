@@ -129,3 +129,62 @@ Stage Summary:
 - Prices now show decimals correctly (R$ 14,90 / R$ 39,90).
 - All previous vibe-coding animations preserved (magnetic buttons, parallax, marquee, count-up, accordion, glow ring on the highlighted plan, sticky countdown bar, floating mobile CTA, etc.).
 - Verified at 360, 390, 768, 1440 viewports.
+
+---
+Task ID: 3
+Agent: main (Z.ai Code)
+Task: Apply user-requested layout adjustments: hero text must overlay the image (with dimming), folders as horizontal carousel, more prominent progress indicator on countdown bar.
+
+Work Log:
+- Read user feedback:
+  1. Hero on mobile: text should OVERLAY the image with dimming (not image-on-top + text-below). Match the original file structure where image is background and text overlays.
+  2. All scenes with images: text overlays with strong overlay/dimming for readability (meia profundidade).
+  3. Keep all vibe-coding animations.
+  4. Red text in hero headline: keep responsive and compact on mobile.
+  5. Countdown bar progress indicator: more prominent and centered, with more destaque.
+  6. Folders section: cards were too big — convert to a horizontal carousel passing from one side to the other. User will later add thumbnail images.
+  7. Keep the page short (low ticket).
+
+- Reverted hero mobile layout in `globals.css`:
+  - Removed the `.pp-hero` mobile rules that set `display:block; min-height:0; padding:0` (image-on-top + text-below).
+  - Removed the `.pp-hero .pp-hero-picture` mobile block-height rules (62svh, 380px, 560px).
+  - Removed the `.pp-hero .pp-hero-picture::after` and `> .pp-bg { object-position: center 22% !important; position: relative }` rules.
+  - Removed the `.pp-hero .pp-scene-content { margin-top: -84px; padding-top:0; padding-bottom:48px }` rule.
+  - Now the hero on mobile behaves like other scenes: image is `position:absolute; inset:0` background, text overlays on top with dimming.
+  - Added `.pp-hero { align-items: flex-end; padding-bottom: 40px }` on mobile so text sits at the bottom of the section.
+  - Added `.pp-hero .pp-hero-picture > .pp-bg { object-position: center top !important }` so the masked character's face stays visible at top of the image.
+  - Added `.pp-hero .pp-overlay` mobile-specific gradient: `linear-gradient(0deg, rgba(7,7,10,0.96) 0%, rgba(7,7,10,0.78) 35%, rgba(7,7,10,0.3) 75%, rgba(7,7,10,0.18) 100%)` — very strong dimming at bottom (where text+CTA sit, for readability) and mild at top (so character's face is visible).
+  - Also strengthened the overlay for ALL non-hero scenes on mobile: `linear-gradient(0deg, rgba(7,7,10,0.95) 0%, rgba(7,7,10,0.7) 45%, rgba(7,7,10,0.35) 75%, rgba(7,7,10,0.2) 100%)`.
+
+- Made countdown bar progress indicator more prominent in `CountdownBar.tsx`:
+  - Was a 2px thin line at the bottom of the bar.
+  - Now: 5px tall track with `bg-black/25` background, filled by a gradient bar with `shadow-[0_0_10px_2px_rgba(245,165,36,0.7)]` (amber glow).
+  - Added a glowing white marker dot (`h-3 w-3 rounded-full bg-white shadow-[0_0_12px_3px_rgba(255,255,255,0.85)]`) that travels along the bar with the leading edge (via `left: width` MotionValue + `translateX(-50%)`).
+  - The dot serves as a "destaque no meio" — a prominent visual indicator of progress.
+
+- Rewrote `FolderCard.tsx` for the horizontal marquee:
+  - Cards are now compact (`w-[210px] shrink-0`), with a placeholder thumbnail area at top (`aspect-[4/2]` with folder glyph as placeholder + dark gradient overlay) — user will swap in their own images later.
+  - Title `text-[17px]`, subtitle `text-[11.5px]`, padding `p-3` (was `p-[18px]`).
+  - Cards duplicate the array (`[...FOLDERS, ...FOLDERS]`) so the marquee can loop seamlessly.
+  - New `FoldersMarquee` component: `flex w-max gap-3 pp-marquee` with `group-hover:[animation-play-state:paused]` — when user hovers, the marquee pauses so they can read the cards.
+  - Marquee mask: `[mask-image:linear-gradient(90deg,transparent,#000_6%,#000_94%,transparent)]` — fades the cards at the left/right edges.
+- Updated `page.tsx`:
+  - Removed the inline grid of FolderCards (was `grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3`).
+  - Now renders `<FoldersMarquee />` directly.
+  - Removed unused `FOLDERS` const and `FolderCard` import.
+
+Verification (Agent Browser + VLM):
+- Mobile (390×844) hero: VLM confirms "the masked character image is visible as a full-bleed background. The headline text is overlaid on top of the image with a darkened/dimmed background for readability." Kicker + headline + body + amber CTA all visible. ✓
+- Desktop (1440×900) hero: VLM confirms "masked character is visible as a full-bleed background with the headline overlaid." CTA exists at y=997 (below viewport, expected). ✓
+- Mobile folders marquee: VLM confirms compact cards "ASTIDORES" + "ENTREVISTAS" visible side-by-side with red accent borders, designed as carousel. ✓
+- Desktop folders: VLM confirms cards "DEBATES", "DISCURSOS", "REAÇÕES", "POLÊMICAS" (one partially visible) arranged horizontally with red left borders. ✓
+- Progress indicator: VLM confirms "thick (3-5px) horizontal progress indicator with a glowing marker dot at the right end." ✓
+- Lint clean.
+
+Stage Summary:
+- Hero now uses image-as-background + text-overlay on all viewports (matches original file structure).
+- Strong dimming overlay on mobile ensures text readability while keeping the masked character visible at the top.
+- Folders are now a continuously-sliding horizontal marquee of compact cards (pauses on hover), with a placeholder image area where the user will add thumbnails.
+- Countdown bar progress indicator is now 5px tall with amber glow + a traveling white marker dot for prominence.
+- All previous animations preserved.
+- Page remains short — no new content added, just adjusted existing sections.

@@ -80,12 +80,23 @@ export function CountdownBar() {
         <span className="text-white/70">· só volta daqui a 4 anos</span>
       </div>
 
-      {/* thin progress bar that depletes as you scroll toward CTA */}
-      <motion.div
-        style={{ width }}
-        className="h-[2px] bg-gradient-to-r from-[#f5a524] via-white to-transparent"
-        aria-hidden
-      />
+      {/* prominent centered progress indicator that depletes as you scroll toward CTA */}
+      <div className="relative h-[5px] w-full bg-black/25">
+        <motion.div
+          style={{ width }}
+          className="absolute left-0 top-0 h-full origin-left bg-gradient-to-r from-[#f5a524] via-white to-[#f5a524] shadow-[0_0_10px_2px_rgba(245,165,36,0.7)]"
+          aria-hidden
+        />
+        {/* glowing marker that travels with the leading edge */}
+        <motion.div
+          style={{
+            left: width,
+            translateX: '-50%',
+          }}
+          className="absolute top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-white shadow-[0_0_12px_3px_rgba(255,255,255,0.85)]"
+          aria-hidden
+        />
+      </div>
     </motion.div>
   )
 }
