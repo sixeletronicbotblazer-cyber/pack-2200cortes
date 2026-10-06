@@ -1,0 +1,169 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-oswald);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Pack Política palette */
+  --color-pp-red: #e11d2e;
+  --color-pp-amber: #f5a524;
+  --color-pp-ink: #07070a;
+  --color-pp-paper: #f3efe8;
+  --color-pp-ink-2: #0d0d11;
+  --color-pp-line: #2a2a30;
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: #07070a;
+  --foreground: #f3efe8;
+  --card: #0d0d11;
+  --card-foreground: #f3efe8;
+  --popover: #0d0d11;
+  --popover-foreground: #f3efe8;
+  --primary: #f5a524;
+  --primary-foreground: #150d00;
+  --secondary: #16161c;
+  --secondary-foreground: #f3efe8;
+  --muted: #16161c;
+  --muted-foreground: #9a948a;
+  --accent: #1a0b0e;
+  --accent-foreground: #f3efe8;
+  --destructive: #e11d2e;
+  --border: #2a2a30;
+  --input: #2a2a30;
+  --ring: #f5a524;
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: #0d0d11;
+  --sidebar-foreground: #f3efe8;
+  --sidebar-primary: #f5a524;
+  --sidebar-primary-foreground: #150d00;
+  --sidebar-accent: #16161c;
+  --sidebar-accent-foreground: #f3efe8;
+  --sidebar-border: #2a2a30;
+  --sidebar-ring: #f5a524;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-inter), system-ui, sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-oswald), Impact, "Arial Narrow", sans-serif;
+    text-transform: uppercase;
+    line-height: 1.02;
+    letter-spacing: 0.01em;
+  }
+}
+
+/* ===== Pack Politica utilities ===== */
+@layer utilities {
+  .pp-wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 22px;
+  }
+  .pp-grain {
+    background-image: radial-gradient(
+        rgba(255, 255, 255, 0.035) 1px,
+        transparent 1px
+      );
+    background-size: 3px 3px;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  /* Custom scrollbar for scroll areas */
+  .pp-scroll::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .pp-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .pp-scroll::-webkit-scrollbar-thumb {
+    background: #2a2a30;
+    border-radius: 999px;
+  }
+  .pp-scroll::-webkit-scrollbar-thumb:hover {
+    background: #f5a524;
+  }
+}
+
+/* Marquee for badges */
+@keyframes pp-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+.pp-marquee {
+  animation: pp-marquee 22s linear infinite;
+}
+.pp-marquee-rev {
+  animation: pp-marquee 26s linear infinite reverse;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pp-marquee,
+  .pp-marquee-rev {
+    animation: none;
+  }
+}
