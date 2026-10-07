@@ -376,3 +376,50 @@ Verification (Agent Browser + VLM):
 Stage Summary:
 - Countdown bar now always stacks vertically (3 rows) on all viewports — headline (bigger, white, bold), subheadline "só volta daqui a 4 anos" (clearly visible), then cronometro (bigger digits, highlighted boxes with border + shadow).
 - Hero mobile: image block is ~80px taller (75svh vs 68svh), character is positioned higher in the frame (object-position 10% vs 15%), and title/subheadline rise 80px more over the image's bottom fade (margin-top -190px vs -110px) — all matching the "~2cm more" the user requested.
+
+---
+Task ID: 7
+Agent: main (Z.ai Code)
+Task: Apply real PerfectPay checkout links + publish to GitHub repo sixeletronicbotblazer-cyber/pack-2200cortes.
+
+Work Log:
+- User provided 3 PerfectPay checkout URLs:
+  1. Plano Inicial (R$ 14,90): https://go.perfectpay.com.br/PPU38CQGPUK
+  2. Oferta única (R$ 24,90 — the upsell price): https://go.perfectpay.com.br/PPU38CQGPUL
+  3. Plano Completo (R$ 39,90): https://go.perfectpay.com.br/PPU38CQGPUP
+
+- Updated `src/components/pack/Plans.tsx`:
+  - Inicial plan `href`: `#CHECKOUT_INICIAL` → `https://go.perfectpay.com.br/PPU38CQGPUK`
+  - Completo plan `href`: `#CHECKOUT_COMPLETO` → `https://go.perfectpay.com.br/PPU38CQGPUP`
+  - UpsellModal `onAccept` callback: now navigates via `window.location.href = 'https://go.perfectpay.com.br/PPU38CQGPUL'` (Oferta única R$ 24,90)
+  - UpsellModal `onDecline` callback: now navigates via `window.location.href = 'https://go.perfectpay.com.br/PPU38CQGPUK'` (Inicial R$ 14,90)
+
+- Updated `src/components/pack/UpsellModal.tsx`:
+  - The accept CTA's `href` attribute changed from `#CHECKOUT_COMPLETO` → `https://go.perfectpay.com.br/PPU38CQGPUL` as a fallback (in case JS fails, the link still works).
+
+- Updated `.gitignore`:
+  - Added `/upload/`, `/download/`, `/db/`, `/tests/`, `/examples/`, `/mini-services/`, `/.zscripts/`, `/agent-ctx/` to exclude dev-only folders from the published repo.
+  - Added `worklog.md` and `.z-ai-config`, `.claude` to keep local dev artifacts out of the repo.
+
+- Git operations:
+  - Committed all 3 modified files in a single commit: `feat: apply PerfectPay checkout links + upsell flow` (commit b28b202)
+  - Verified the GitHub repo state via API: empty (size: 0), default branch `main`, no existing commits
+  - Pushed using a one-time authenticated URL with the token in an env var (`TOKEN=ghp_***`) — the token was NOT saved in the git remote config
+  - Configured the `origin` remote as `https://github.com/sixeletronicbotblazer-cyber/pack-2200cortes.git` (no token, safe to keep)
+  - Set up upstream tracking: `main` → `origin/main`
+  - Verified via the GitHub API that commit b28b202 is on the remote (with message "feat: apply PerfectPay checkout links + upsell flow")
+
+Verification (Agent Browser):
+- Plans section: "Quero o Inicial" CTA href = `https://go.perfectpay.com.br/PPU38CQGPUK` ✓ (R$ 14,90)
+- Plans section: "Quero o Completo" CTA href = `https://go.perfectpay.com.br/PPU38CQGPUP` ✓ (R$ 39,90)
+- Click "Quero o Inicial" → upsell modal opens
+- Upsell modal "Quero o Completo por R$ 24,90" CTA href = `https://go.perfectpay.com.br/PPU38CQGPUL` ✓ (Oferta única R$ 24,90)
+- Upsell modal decline link text = "Não, quero só o Inicial por R$ 14,90" ✓ (navigates to PPU38CQGPUK)
+
+Stage Summary:
+- All 3 PerfectPay checkout URLs are now wired up:
+  - Inicial direct: PPU38CQGPUK (R$ 14,90)
+  - Completo direct: PPU38CQGPUP (R$ 39,90)
+  - Upsell (Oferta única R$ 24,90): PPU38CQGPUL — fires when user clicks Inicial and then accepts the bump in the modal
+- Repo published at https://github.com/sixeletronicbotblazer-cyber/pack-2200cortes.git (branch: main, latest commit: b28b202)
+- Token was used only in the one-time push command via env var, never written to the remote config or any file in the repo.
