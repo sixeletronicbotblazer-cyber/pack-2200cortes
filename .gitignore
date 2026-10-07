@@ -67,3 +67,4 @@ server.log
 worklog.md
 .z-ai-config
 .claudepreview-*.png
+*.png
