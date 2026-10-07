@@ -503,3 +503,43 @@ Stage Summary:
 - Commercial definition: Inicial R$ 14,90 (300 cortes + 6 módulos), Completo R$ 39,90 (5 mil + 6 módulos + extras + atualizações), Upgrade R$ 27,90 (+R$ 13, -30%)
 - 2200 → 5 mil unified everywhere in code; PerfectPay campaign name and Oferta única price flagged for user to update externally
 - Pushed to https://github.com/sixeletronicbotblazer-cyber/pack-2200cortes.git (commit 9c3ea92)
+
+---
+Task ID: 9
+Agent: main (Z.ai Code)
+Task: Adjust ONLY the hero on mobile — image fills container (cover, ~23% bigger), text at chest height, "5 mil cortes" in red, new shorter subheadline.
+
+Work Log:
+- Analyzed the hero mobile image (752×1344) via VLM: character is centered, hat at 35-48%, face/mask at 44-56%, hands at ~90%, empty dark space at top (0-35%) and bottom.
+
+- globals.css changes (mobile hero, @media max-width:820px only):
+  - Image object-fit: contain → cover (fills container, no empty space; character ~23% bigger: 390px wide vs 316px with contain)
+  - Image object-position: center top → center 45% (centers on character: hat + mask + hands visible, hat not cut)
+  - Container: 67svh → 70svh (slightly taller for more character room)
+  - min-height: 420→440, max-height: 600→620
+  - Gradient: 55% → 75% height, changed from 2-stop (transparent → #07070a) to 5-stop soft fade (rgba 0.92 → 0.7 → 0.4 → 0.15 → transparent) — no visible rectangular box edge
+  - Text margin-top: -120px → -200px (headline starts at ~chest height, face/mask area free)
+
+- page.tsx changes (hero text, all viewports):
+  - Headline: wrapped "5 mil cortes" in <em className="not-italic text-[#e11d2e]"> (vivid red #e11d2e); rest stays white
+  - Subheadline: replaced "Acesse o acervo, escolha seus vídeos e siga seis módulos para montar sua conta, criar uma oferta ou divulgar como afiliado." with shorter "Receba os cortes e 6 módulos para criar conteúdo e montar sua oferta." (2-3 lines on 390px)
+  - CTA: "Quero ver o pack" (unchanged)
+
+- Desktop hero: UNCHANGED (per user "Ajuste SOMENTE o hero da página no mobile"). Desktop keeps object-position: 70% 50%, margin-top: 0.
+
+Verification (Agent Browser + DOM + VLM):
+- 390px DOM: h1="Mais de [5 mil cortes (red)] de política para criar conteúdo.", lead="Receba os cortes e 6 módulos...", imgObjFit=cover, imgObjPos="50% 45%", contentMarginTop=-200px, picH=590px, canScrollX=false ✓
+- 320px: canScrollX=false, imgObjFit=cover, imgObjPos="50% 45%", mt=-200px ✓
+- 375px: same ✓
+- 430px: same ✓
+- Desktop 1440px: imgObjFit=cover, imgObjPos="70% 50%", mt=0px (unchanged) ✓
+- VLM 390px: character visible (hat+mask+suit+red lighting), "5 MIL CORTES" in red, subheadline correct, text at chest/torso area ✓
+- Lint clean
+- Committed (04edbfe, then a58e83a to remove screenshots) and pushed to GitHub
+
+Stage Summary:
+- Hero mobile: image fills container (cover, ~23% bigger character), centered on character (hat/mask/hands visible, hat not cut), text at chest height (margin-top -200px, face free), soft 5-stop gradient for readability (no rectangular box)
+- Headline: "5 mil cortes" in vivid red, rest white
+- Subheadline: shorter "Receba os cortes e 6 módulos para criar conteúdo e montar sua oferta."
+- Desktop hero unchanged
+- All widths (320, 375, 390, 430, 1440) verified: no horizontal scroll
