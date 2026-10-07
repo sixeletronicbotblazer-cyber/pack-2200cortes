@@ -337,3 +337,42 @@ Stage Summary:
 - Carrossel no longer pauses on hover — continuous scroll always.
 - Hero mobile: image is now taller (68svh), character lifted (object-position 15%), and title/subheadline rise 110px over the image's bottom fade (was 84px) — closer to the image without fully covering it.
 - Fixed a CSS specificity bug where .pp-wrap's shorthand padding was overriding .pp-scene-content's vertical padding.
+
+---
+Task ID: 6
+Agent: main (Z.ai Code)
+Task: Reorganize countdown bar (stack vertically with bigger headline, clear subheadline, bigger highlighted cronometro) + raise hero image and title/subheadline by ~2cm more.
+
+Work Log:
+- Analyzed user's attached screenshot (pasted_image_1791340198393.png) showing the current countdown bar layout (3 rows due to mobile wrap).
+
+- Restructured `CountdownBar.tsx`:
+  - Changed from `flex flex-wrap items-center justify-center gap-x-3 gap-y-1` (single line, wraps) to `flex flex-col items-center gap-1.5` (always 3 rows stacked vertically, on all viewports).
+  - Reordered to: Headline → Subheadline → Cronometro (was: Headline → Cronometro → "só volta daqui a 4 anos").
+  - **Row 1 (Headline)**: bigger (`text-[14px]` was 13px, `font-bold` was semibold), pure white color, with ⚡ animation. Mobile `text-[11.5px]`.
+  - **Row 2 (Subheadline)**: "só volta daqui a 4 anos" — now `text-white/90 font-semibold` (was `text-white/70`), more visible. `text-[12px]` desktop, `text-[10.5px]` mobile.
+  - **Row 3 (Cronometro)**: FlipDigits are now bigger and "highlighted":
+    - Box: `h-[36px] w-[30px]` (was 26×22) on desktop, `h-[28px] w-[23px]` on mobile (was 22×18)
+    - Added `border border-white/20`, `bg-black/35`, `shadow-[0_2px_8px_rgba(0,0,0,0.25)]`, `rounded-[5px]` (was `rounded-[3px]`) for the "destacando" effect
+    - Digit font: `text-[20px]` (was 15px) desktop, `text-[15px]` mobile (was 13px)
+    - Label: `text-[9px] font-semibold text-white/75` (was `text-[8px] text-white/55`), `tracking-[0.18em]` (was 0.16em) — bigger and more visible
+    - Gap between boxes: `gap-2.5` desktop, `gap-1.5` mobile (was `gap-[6px]`)
+
+- Adjusted hero mobile (~2cm / ~80px more lift):
+  - Picture block: `height: 68svh → 75svh` (+7svh ≈ +60px on 844px viewport, close to 2cm on mobile DPI)
+  - min-height: `380px → 480px` (+100px)
+  - max-height: `560px → 680px` (+120px)
+  - Image object-position: `center 15% → center 10%` (shows higher up the image — character's face/hat move up in the visible frame)
+  - Text content margin-top: `-110px → -190px` (+80px more overlap, so title and subheadline are raised by the same ~2cm)
+  - Verified via JS: picH=633px (was 573px), imgObjPos="50% 10%" (was "50% 15%"), contentMarginTop="-190px" (was "-110px")
+
+Verification (Agent Browser + VLM):
+- Mobile (390×844): countdown bar stacked vertically with 3 rows — Row 1 headline "2º TURNO EM 25/10/2026 · A JANELA FECHA EM", Row 2 subheadline "só volta daqui a 4 anos", Row 3 cronometro (18 DIAS 17 HORAS 22 MIN 45 SEG). ✓
+- Mobile hero: tall vertical portrait, character (black fedora + white mask) positioned in upper portion, face/hat clearly visible near top. Headline text overlaps the bottom of the image (rising up). ✓
+- Mobile computed: picH=633px, picMinH=480px, picMaxH=680px, contentMarginTop=-190px, imgObjPos="50% 10%". ✓
+- Desktop (1440×900): countdown bar also stacked vertically with 3 rows (was single line). ✓
+- Lint clean.
+
+Stage Summary:
+- Countdown bar now always stacks vertically (3 rows) on all viewports — headline (bigger, white, bold), subheadline "só volta daqui a 4 anos" (clearly visible), then cronometro (bigger digits, highlighted boxes with border + shadow).
+- Hero mobile: image block is ~80px taller (75svh vs 68svh), character is positioned higher in the frame (object-position 10% vs 15%), and title/subheadline rise 80px more over the image's bottom fade (margin-top -190px vs -110px) — all matching the "~2cm more" the user requested.

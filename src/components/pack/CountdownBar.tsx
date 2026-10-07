@@ -15,22 +15,22 @@ function diff() {
   }
 }
 
-/** Tiny digit that flips on change */
+/** Digit box that flips on change — bigger now to "destacar o cronômetro" */
 function FlipDigit({ value, label }: { value: number; label: string }) {
   return (
     <span className="inline-flex flex-col items-center">
-      <span className="relative inline-flex h-[26px] w-[22px] items-center justify-center overflow-hidden rounded-[3px] bg-black/30 tabular-nums max-[820px]:h-[22px] max-[820px]:w-[18px]">
+      <span className="relative inline-flex h-[36px] w-[30px] items-center justify-center overflow-hidden rounded-[5px] border border-white/20 bg-black/35 tabular-nums shadow-[0_2px_8px_rgba(0,0,0,0.25)] max-[820px]:h-[28px] max-[820px]:w-[23px]">
         <motion.span
           key={value}
           initial={{ y: '100%', opacity: 0 }}
           animate={{ y: '0%', opacity: 1 }}
           transition={{ type: 'spring', stiffness: 380, damping: 28 }}
-          className="font-display text-[15px] font-bold leading-none text-white max-[820px]:text-[13px]"
+          className="font-display text-[20px] font-bold leading-none text-white max-[820px]:text-[15px]"
         >
           {String(value).padStart(2, '0')}
         </motion.span>
       </span>
-      <span className="mt-[2px] text-[8px] uppercase tracking-[0.16em] text-white/55">
+      <span className="mt-[3px] text-[9px] font-semibold uppercase tracking-[0.18em] text-white/75 max-[820px]:text-[8px]">
         {label}
       </span>
     </span>
@@ -39,8 +39,10 @@ function FlipDigit({ value, label }: { value: number; label: string }) {
 
 /**
  * Sticky top countdown bar.
- * - red bar at the very top of the page
- * - turns into a sticky floating pill after scrolling past hero
+ * Stacked vertically (always — not flex-wrap):
+ *   Row 1: headline (bigger, white, bold) "2º TURNO EM 25/10/2026 · A JANELA FECHA EM"
+ *   Row 2: subheadline "só volta daqui a 4 anos" (clearly visible)
+ *   Row 3: cronometro (bigger digits + boxes, highlighted)
  */
 export function CountdownBar() {
   const [t, setT] = useState(diff)
@@ -59,8 +61,9 @@ export function CountdownBar() {
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className="sticky top-0 z-50 w-full bg-[#e11d2e] text-white"
     >
-      <div className="pp-wrap flex flex-wrap items-center justify-center gap-x-3 gap-y-1 py-2 text-center text-[13px] font-semibold tracking-[0.04em] max-[820px]:py-2 max-[820px]:px-3.5 max-[820px]:text-[11.5px] max-[820px]:leading-[1.35]">
-        <span className="inline-flex items-center gap-2">
+      <div className="pp-wrap flex flex-col items-center gap-1.5 py-2.5 text-center max-[820px]:py-2 max-[820px]:gap-1">
+        {/* Row 1: HEADLINE — bigger, white, bold */}
+        <span className="inline-flex items-center gap-2 text-[14px] font-bold tracking-[0.05em] text-white max-[820px]:text-[11.5px]">
           <motion.span
             animate={{ rotate: [0, 10, -8, 0] }}
             transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
@@ -70,14 +73,18 @@ export function CountdownBar() {
           2º TURNO EM 25/10/2026 · A JANELA FECHA EM
         </span>
 
-        <span className="inline-flex items-end gap-[6px]">
+        {/* Row 2: SUBHEADLINE — clearly visible */}
+        <span className="text-[12px] font-semibold tracking-[0.04em] text-white/90 max-[820px]:text-[10.5px]">
+          só volta daqui a 4 anos
+        </span>
+
+        {/* Row 3: CRONÔMETRO — bigger digits, highlighted boxes */}
+        <span className="inline-flex items-end gap-2.5 max-[820px]:gap-1.5">
           <FlipDigit value={t.days} label="dias" />
           <FlipDigit value={t.hours} label="horas" />
           <FlipDigit value={t.minutes} label="min" />
           <FlipDigit value={t.seconds} label="seg" />
         </span>
-
-        <span className="text-white/70">· só volta daqui a 4 anos</span>
       </div>
 
       {/* prominent centered progress indicator that depletes as you scroll toward CTA */}
