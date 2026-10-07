@@ -52,3 +52,18 @@ prompt
 server.log
 # Skills directory
 /skills/
+
+# Dev-only folders (not part of the published product)
+/upload/
+/download/
+/db/
+/tests/
+/examples/
+/mini-services/
+/.zscripts/
+/agent-ctx/
+
+# Local dev artifacts
+worklog.md
+.z-ai-config
+.claude

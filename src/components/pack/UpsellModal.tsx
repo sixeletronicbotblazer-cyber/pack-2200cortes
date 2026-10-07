@@ -171,7 +171,7 @@ export function UpsellModal({ isOpen, onClose, onAccept, onDecline }: UpsellModa
               {/* CTA — big affirming button */}
               <div className="mt-5">
                 <CTAButton
-                  href="#CHECKOUT_COMPLETO"
+                  href="https://go.perfectpay.com.br/PPU38CQGPUL"
                   variant="amber"
                   className="w-full justify-center text-[15px]"
                   onClick={(e) => {

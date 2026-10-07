@@ -28,7 +28,7 @@ const PLANS: Plan[] = [
       'Acesso vitalício',
     ],
     variant: 'red',
-    href: '#CHECKOUT_INICIAL',
+    href: 'https://go.perfectpay.com.br/PPU38CQGPUK',
   },
   {
     name: 'Completo',
@@ -42,7 +42,7 @@ const PLANS: Plan[] = [
     ],
     variant: 'amber',
     highlighted: true,
-    href: '#CHECKOUT_COMPLETO',
+    href: 'https://go.perfectpay.com.br/PPU38CQGPUP',
   },
 ]
 
@@ -161,16 +161,16 @@ export function Plans() {
         onClose={() => setUpsellOpen(false)}
         onAccept={() => {
           setUpsellOpen(false)
-          // Navigate to the COMPLETE checkout (with the upsell discount)
+          // Navigate to the Oferta Única checkout (R$ 24,90 — Completo via upsell)
           if (typeof window !== 'undefined') {
-            window.location.hash = 'CHECKOUT_COMPLETO'
+            window.location.href = 'https://go.perfectpay.com.br/PPU38CQGPUL'
           }
         }}
         onDecline={() => {
           setUpsellOpen(false)
           // Navigate to the INICIAL checkout (R$ 14,90)
           if (typeof window !== 'undefined') {
-            window.location.hash = 'CHECKOUT_INICIAL'
+            window.location.href = 'https://go.perfectpay.com.br/PPU38CQGPUK'
           }
         }}
       />
