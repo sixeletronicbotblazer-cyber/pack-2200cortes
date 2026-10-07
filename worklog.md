@@ -423,3 +423,83 @@ Stage Summary:
   - Upsell (Oferta única R$ 24,90): PPU38CQGPUL — fires when user clicks Inicial and then accepts the bump in the modal
 - Repo published at https://github.com/sixeletronicbotblazer-cyber/pack-2200cortes.git (branch: main, latest commit: b28b202)
 - Token was used only in the one-time push command via env var, never written to the remote config or any file in the repo.
+
+---
+Task ID: 8
+Agent: main (Z.ai Code)
+Task: Full page revision per user spec — hero mobile raise + show whole character, copy audit with progression reorder, commercial definition update (5 mil cortes, R$ 27,90 upgrade), 2200 → 5 mil unification.
+
+Work Log:
+
+=== 1. HERO MOBILE LAYOUT (raise ~70px, show whole character) ===
+- Image block: 75svh → 67svh (shorter, raises visual set by ~70px on 844px viewport)
+- min-height: 480px → 420px, max-height: 680px → 600px
+- Image object-fit: cover → contain (shows WHOLE character: hat, mask, face, body — no cropping)
+- Picture block background: added `background-color: #07070a` to match page, so empty space around the image (from object-fit: contain) blends seamlessly — per user request "Se o arquivo não preencher a nova área, expanda o fundo escuro ao redor dela"
+- Image object-position: center 10% → center top (image anchored to top, dark space at bottom for the fade)
+- Text margin-top: -190px → -120px (less overlap, keeps headline/subheadline/CTA close to image without fully covering it)
+- Headline font: added `max-[430px]:text-[clamp(30px,9vw,40px)]` and `max-[360px]:text-[28px]` for very small screens
+- Verified at 320, 375, 390, 430px: no horizontal scroll (body overflow-x: hidden), no text cut off, layout not broken
+
+=== 2. COPY AUDIT (progression: acervo → por que → como são → o que faz → módulos → Drive → prazo → plano → dúvidas) ===
+- Reordered sections: Folders (acervo tangível) now BEFORE Lados (por que política agora)
+- Added NEW contextual sentence block right below hero: "O segundo turno é em 25 de outubro. Se você quer publicar durante essa conversa, comece a preparar seu conteúdo e sua oferta agora."
+- Hero: new headline "Mais de 5 mil cortes de política para criar conteúdo.", new subheadline "Acesse o acervo, escolha seus vídeos e siga seis módulos para montar sua conta, criar uma oferta ou divulgar como afiliado.", CTA "Quero ver o pack"
+- Lados: reworded to avoid "a atenção vira audiência" → "O segundo turno coloca o assunto no feed de todo mundo." + "Quem tem vídeo pronto publica enquanto os outros ainda procuram material. O pack encurta o caminho entre a ideia e o post."
+- Cortes carousel: reworded to avoid "cortes prontos" → "Vertical, no formato que posta, com gancho desde o primeiro segundo. Veja exemplos."
+- Folders Lead: reworded "Nada de garimpar live de 3 horas..." → "Nada de baixar live de 3 horas para aproveitar 3 segundos. Os cortes chegam separados por tema e momento, no formato vertical, direto no editor."
+- Phone mockup (demonstration block): new headline "Abra a pasta, escolha o corte, leve para o editor e publique com sua abordagem." (user-provided text); caption changed from "Seu corte pronto" → "Prévia do arquivo" (honest, doesn't pretend illustrative image is a real cut); added small note "Prévia ilustrativa. Os cortes reais estão no Drive."
+- Checklist (phone mockup section): reworded to avoid repetition with Folders Lead — removed "Mais de 5 mil cortes verticais organizados por tema e momento" (already in Folders); kept "Pastas no Google Drive: ache a cena em segundos", "Funciona no CapCut, Premiere, DaVinci ou qualquer editor", "Acesso vitalício, sem assinatura", "Treinamento passo a passo (abaixo)"
+- VS: reworded "Do jeito difícil" → "Sem o pack"; "Garimpar material bruto" → "Procurar material bruto"; "Cena já em vertical, pronta para a timeline" → "Cena em vertical, no formato da timeline"; H2 "A diferença entre garimpar e editar hoje mesmo" → "Com o pack vs. sem o pack"
+- Paths: kicker "A oportunidade" → "O que fazer com os cortes"; H2 "Um público engajado. Três jeitos de transformar atenção em renda." → "Três caminhos para usar o material."; Lead reworded; paths renamed 01 Viralizar→Publicar, 02 Vender cortes→Oferecer, 03 Infoprodutos e afiliação→Afiliar; path descriptions reworded to be shorter and objective
+- Training: H2 "Do corte à primeira venda: o caminho completo" → "Seis módulos do corte à oferta" (avoids "primeira venda")
+- Como funciona: kicker "Como funciona" → "Como você recebe"
+- Escassez: H2 "Fanatismo dá audiência. E só volta em 4 anos." → "O segundo turno é em 25/10/2026. A conversa acaba depois."; Lead reworded to explicitly say "O acesso ao pack é vitalício e continua após a eleição. Mas o pico de atenção acontece agora — quem for publicar durante o ciclo precisa começar antes." (mentions 25/10/2026, does NOT claim access ends that day)
+
+=== 3. SIX MODULES (user-provided titles + objective descriptions) ===
+01 Criar seus perfis no Instagram, TikTok e YouTube Shorts — "Abra e organize suas contas nos três canais."
+02 Escolher o que oferecer ao público de política — "Defina o que fazer com a audiência do nicho."
+03 Criar seu infoproduto — "Estruture um produto digital a partir do que você já tem."
+04 Montar sua página de vendas — "Construa uma página simples que apresenta a oferta."
+05 Divulgar links e trabalhar como afiliado — "Aprenda a divulgar links e atuar como afiliado."
+06 Editar cortes e criar vídeos com IA — "Use IA para criar cenas que completam os cortes."
+
+=== 4. COMMERCIAL DEFINITION UPDATE ===
+- Inicial (R$ 14,90): features changed from ["300 cortes de política", "Acesso pelo Google Drive", "Formato vertical pronto", "Acesso vitalício"] → ["300 cortes de uma seleção reduzida", "Seis módulos de treinamento", "Acesso pelo Google Drive", "Pagamento único · acesso vitalício"]
+- Completo (R$ 39,90): features changed from ["+5 mil cortes de política", "Treinamento completo: infoproduto, página, afiliação, contas e divulgação", "Vídeos com IA no Flow", "Acesso vitalício"] → ["Mais de 5 mil cortes de política", "Seis módulos de treinamento", "Recursos extras e atualizações previstas", "Pagamento único · acesso vitalício"]
+- UpsellModal: +R$ 10 → +R$ 13; total R$ 24,90 → R$ 27,90; discount -37% → -30%; copy "+2200 cortes" → "mais de 5 mil cortes, os seis módulos, recursos extras e atualizações previstas"; CTA "Quero o Completo por R$ 24,90" → "Quero o Completo por R$ 27,90"
+- PerfectPay URLs unchanged: PPU38CQGPUK (Inicial R$ 14,90), PPU38CQGPUL (Oferta única — currently configured at R$ 24,90 in PerfectPay but modal now shows R$ 27,90), PPU38CQGPUP (Completo R$ 39,90)
+
+=== 5. 2200 → 5 MIL UNIFICATION ===
+- Searched all source code for "2200", "2.200", "+2" — no pack-quantity occurrences remain
+- Hero headline: "+2200 cortes de política" → "Mais de 5 mil cortes de política"
+- UpsellModal copy: "+2200 cortes" → "mais de 5 mil cortes"
+- Plans Completo feature: "+5 mil cortes de política" → "Mais de 5 mil cortes de política"
+- FAQ: already "mais de 5 mil cortes" — unchanged
+- Assets with old number still printed (flagged for user):
+  - PerfectPay campaign name: "Campanha Padrão Produtor - Pack +2200 Cortes PO" (external, can't change from code)
+  - Corte images (corte-01.png .. corte-07.png): screenshots of social media posts — may show view counts like "2.200" or "5.4 mil" but these are engagement metrics from the original posts, NOT pack-quantity claims
+
+=== 6. ASSETS FLAGGED — old "2200" still present ===
+1. PerfectPay dashboard: campaign named "Pack +2200 Cortes PO" — user needs to rename in PerfectPay
+2. PerfectPay "Oferta única" (PPU38CQGPUL): configured at R$ 24,90 but modal now shows R$ 27,90 — user needs to update the PerfectPay price to R$ 27,90 (or change the modal back to R$ 24,90)
+3. Corte images: screenshots may show "2.200" as view counts — these are engagement metrics, not pack quantity; no action needed
+
+Verification (Agent Browser + DOM):
+- 320px: hero readable, headline "MAIS DE 5 MIL CORTES DE POLÍTICA PARA CRIAR CONTEÚDO." fully visible (3 lines, no clipping), no layout break, canScrollX=false ✓
+- 375px: same as above ✓
+- 390px: masked character fully visible (hat + mask + face + body, no cropping), headline visible, contextual sentence present, no horizontal scroll ✓
+- 430px: same ✓
+- Desktop 1440px: hero full-bleed background with masked character, headline overlaid on left, plans visible (Inicial R$ 14,90 / Completo R$ 39,90 with "Mais de 5 mil cortes") ✓
+- DOM verified: h1="Mais de 5 mil cortes de política para criar conteúdo.", contextual sentence present, corte features=["300 cortes de uma seleção reduzida", "Mais de 5 mil cortes de política"], no "2200" anywhere ✓
+- Upsell modal: "pega o COMPLETO por mais R$ 13", "Por mais R$ 13 você recebe mais de 5 mil cortes, os seis módulos, recursos extras e atualizações previstas", price R$ 27,90, -30%, CTA "Quero o Completo por R$ 27,90" ✓
+- Lint clean
+- Committed and pushed to GitHub (commit 9c3ea92)
+
+Stage Summary:
+- Hero mobile raised ~70px, whole character visible (object-fit: contain + dark background expands around image)
+- Full copy audit: reordered sections (Folders before Lados), added contextual sentence, reworded all sections to follow progression and avoid repetition ("atenção vira audiência", "cortes prontos", "primeira venda", "oportunidade" all removed)
+- Six modules updated with user-provided titles and objective one-sentence descriptions
+- Commercial definition: Inicial R$ 14,90 (300 cortes + 6 módulos), Completo R$ 39,90 (5 mil + 6 módulos + extras + atualizações), Upgrade R$ 27,90 (+R$ 13, -30%)
+- 2200 → 5 mil unified everywhere in code; PerfectPay campaign name and Oferta única price flagged for user to update externally
+- Pushed to https://github.com/sixeletronicbotblazer-cyber/pack-2200cortes.git (commit 9c3ea92)
