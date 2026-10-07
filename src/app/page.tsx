@@ -7,6 +7,7 @@ import { CTAButton } from '@/components/pack/CTAButton'
 import { Scene, Kicker, H2, Lead, sceneStagger, sceneRise } from '@/components/pack/Scene'
 import { PhoneMockup } from '@/components/pack/PhoneMockup'
 import { FoldersMarquee } from '@/components/pack/FolderCard'
+import { CortesCarousel } from '@/components/pack/CortesCarousel'
 import { BadgesMarquee, VsBeforeAfter } from '@/components/pack/Badges'
 import { AnimatedChecklist } from '@/components/pack/AnimatedChecklist'
 import { Paths } from '@/components/pack/Paths'
@@ -48,7 +49,7 @@ export default function PackPoliticaPage() {
             variants={sceneRise}
             className="font-display text-[clamp(40px,7.2vw,92px)] font-bold leading-[1.02] tracking-[0.01em] max-[820px]:text-[clamp(34px,10.4vw,48px)] max-[360px]:text-[32px]"
           >
-            +5 mil cortes de política para criar conteúdo e{' '}
+            +2200 cortes de política para criar conteúdo e{' '}
             <em className="not-italic text-[#e11d2e]">buscar suas primeiras vendas</em>
           </motion.h1>
           <Lead>
@@ -105,6 +106,34 @@ export default function PackPoliticaPage() {
           </div>
 
           <BadgesMarquee />
+        </div>
+      </section>
+
+      {/* 2c. NOVA SEÇÃO: Por dentro dos cortes (carrossel de prints) */}
+      <section className="py-24 max-[820px]:py-14">
+        <div className="pp-wrap">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ type: 'spring', stiffness: 90, damping: 16 }}
+          >
+            <Kicker>Por dentro dos cortes</Kicker>
+            <H2>
+              Esse é o tipo de corte que <em className="not-italic text-[#e11d2e]">cai na sua pasta</em>
+            </H2>
+            <Lead>
+              Vertical, pronto para postar e feito para prender atenção. Veja exemplos.
+            </Lead>
+          </motion.div>
+
+          <div className="mt-7">
+            <CortesCarousel />
+          </div>
+
+          <p className="mt-6 text-[13px] text-[#9a948a]">
+            Exemplos de cortes publicados. As visualizações são de cada vídeo e não garantem resultado.
+          </p>
         </div>
       </section>
 

@@ -188,3 +188,85 @@ Stage Summary:
 - Countdown bar progress indicator is now 5px tall with amber glow + a traveling white marker dot for prominence.
 - All previous animations preserved.
 - Page remains short — no new content added, just adjusted existing sections.
+
+---
+Task ID: 4
+Agent: main (Z.ai Code)
+Task: Apply detailed layout/responsiveness spec from user (hero image-on-top + text-below, new "Por dentro dos cortes" carousel section, +5 mil → +2200 cortes in headline).
+
+Work Log:
+- Read user spec carefully:
+  - Hero on mobile MUST be image-on-top + text-below (NOT background + overlay).
+  - All other scenes (lados/criador/fios) on mobile: image as <img> background with overlay (rgba 0.9 / 0.62 / 0.4 bottom-to-top gradient; rgba 0.6 for the centered fios scene).
+  - Section vertical padding on mobile: 72px (non-hero scenes) + 70px bottom fade.
+  - NEW section "Por dentro dos cortes" between Folders and Phone mockup sections — infinite marquee of vertical print cards.
+  - Hero headline: change "+5 mil cortes" → "+2200 cortes".
+  - Carousel cards: aspect 9/19.5, 200px mobile / 220px desktop, radius 20px, border 1px rgba(255,255,255,.08), gap 14px.
+  - Carousel speed: 1.5s per card; loop duration = unique cards × 1.5s, linear infinite.
+  - Hover/touch: pause + card lifts 10px, scale 1.04, red shadow (0 18px 40px rgba(225,29,46,.35)), 200ms.
+  - Edge mask (gradient fade both sides).
+  - prefers-reduced-motion: disable animation + horizontal scroll-snap.
+  - Images in /public/cortes/corte-01.png etc., loading="lazy", decoding="async", width/height set.
+  - Test at 360, 390, 430px: no horizontal scroll, hero image visible above text.
+
+- Copied 7 uploaded PNGs (Screenshot 65/66/67.png, corte 3/4/6/7.png) to /public/cortes/corte-01.png through corte-07.png.
+
+- Updated globals.css:
+  - Restored the hero mobile image-on-top + text-below layout:
+    - `.pp-hero` on mobile: `display:block; min-height:0; padding:0`
+    - `.pp-hero .pp-overlay, .pp-fade` on mobile: `display:none` (no dark overlay over the hero image)
+    - `.pp-hero .pp-hero-picture` on mobile: `position:relative; height:62svh; min-height:380px; max-height:560px; overflow:hidden`
+    - `.pp-hero .pp-hero-picture::after`: 55% bottom gradient `linear-gradient(transparent, #07070a)` for smooth fade
+    - `.pp-hero .pp-hero-picture > .pp-bg`: `object-fit:cover; object-position:center 22% !important`
+    - `.pp-hero .pp-scene-content`: `margin-top:-84px; padding-top:0; padding-bottom:48px` (text rises 84px over the gradient)
+  - Non-hero scenes on mobile: overlay is now `linear-gradient(0deg, rgba(7,7,10,.9) 0%, rgba(7,7,10,.62) 55%, rgba(7,7,10,.4) 100%)` (matching user spec).
+  - Centered scene (fios) overlay on mobile: `rgba(7,7,10,.6)`.
+  - Non-hero scene padding on mobile: 72px (was 56px) + 70px bottom fade.
+  - Added `.pp-cortes-*` CSS classes for the new cortes carousel:
+    - `@keyframes pp-cortes-marquee` (translateX 0 → -50%)
+    - `.pp-cortes-track`: `overflow:hidden` + edge mask `linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent)`
+    - `.pp-cortes-marquee`: `display:flex; width:max-content; gap:14px; animation:pp-cortes-marquee linear infinite` (duration set inline)
+    - Pause on hover/focus-within/active (covers desktop hover + mobile touch)
+    - `.pp-cortes-card`: `width:200px; aspect-ratio:9/19.5; border-radius:20px; border:1px solid rgba(255,255,255,.08); overflow:hidden; flex-shrink:0; background:#0d0d11; transition:transform 200ms, box-shadow 200ms`
+    - Card img: `width:100%; height:100%; object-fit:cover; display:block`
+    - Card hover: `transform:translateY(-10px) scale(1.04); box-shadow:0 18px 40px rgba(225,29,46,.35)`
+    - Desktop width override: `220px` at min-width:821px
+    - prefers-reduced-motion: animation:none, track becomes `overflow-x:auto` with `scroll-snap-type:x mandatory`, card has `scroll-snap-align:start`, hover transform/box-shadow disabled
+
+- Created `src/components/pack/CortesCarousel.tsx`:
+  - `CORTES` array with 7 entries: `{src, w, h}` for each image (w/h are intrinsic dims for layout reservation).
+  - `CARD_TIME_SECONDS = 1.5` (per-card time)
+  - Duplicates the array `[...CORTES, ...CORTES]` for seamless loop.
+  - `animationDuration = ${CORTES.length * 1.5}s` (7 × 1.5 = 10.5s) set inline on `.pp-cortes-marquee`.
+  - Renders `.pp-cortes-pause > .pp-cortes-track > .pp-cortes-marquee > .pp-cortes-card > img` structure.
+  - All `<img>` have `loading="lazy"`, `decoding="async"`, `width` and `height` set.
+  - To add more cards later, just add entries to the `CORTES` array — duration recalculates automatically.
+
+- Updated `page.tsx`:
+  - Added new section between Folders and Phone mockup:
+    - Kicker: "Por dentro dos cortes"
+    - H2: "Esse é o tipo de corte que cai na sua pasta" (with "cai na sua pasta" in red)
+    - Lead: "Vertical, pronto para postar e feito para prender atenção. Veja exemplos."
+    - `<CortesCarousel />` component
+    - Small notice: "Exemplos de cortes publicados. As visualizações são de cada vídeo e não garantem resultado."
+  - Changed hero h1 from "+5 mil cortes de política" to "+2200 cortes de política".
+  - All other text unchanged (per user rule "NÃO alterar textos, copy, cores, fontes, ordem das seções, preços, links nem o checkout").
+
+Verification (Agent Browser + VLM):
+- 360px width: no horizontal scroll (`scrollW=360, clientW=360, hasHScroll=false`), page readable, hero with image at top + text below. ✓
+- 390px width: hero with image at TOP + headline BELOW (VLM confirmed), fade gradient transition, text on solid dark background not overlaid. ✓
+- 430px width: no horizontal scroll (`scrollW=430, clientW=430, hasHScroll=false`), hero with image at top + headline below. ✓
+- Cortes carousel DOM verified: 14 cards (7 unique × 2 for seamless loop), sources `/cortes/corte-01.png` through `corte-07.png`, card width 198px mobile (close to 200px target), height 431px (aspect 9/19.5 ✓), animation duration 10.5s (7 × 1.5s), linear, infinite. ✓
+- All 14 cortes images loaded successfully (`complete && naturalWidth > 0`). ✓
+- Desktop cortes cards: 220px width, 476.65px height (aspect 9/19.5 ✓). ✓
+- Desktop hero: using IMG.hero (1344×752 horizontal masked character), object-position 70% 50% (showing character on right side), image complete. ✓
+- Mobile hero: using IMG.heroM (752×1344 vertical) via `<source media="(max-width:820px)">`, picture block 523px tall (within 380-560px range), image object-position 50% 22%. ✓
+- Lint clean.
+
+Stage Summary:
+- Hero mobile now correctly uses image-on-top + text-below layout (image is NOT behind text).
+- All other scenes on mobile keep image-as-background with the user-specified overlay gradient.
+- New "Por dentro dos cortes" carousel section inserted between Folders and Phone mockup, with infinite marquee of vertical print cards (200px mobile / 220px desktop, aspect 9/19.5, radius 20px), pausing on hover/touch with lift+scale+red shadow, edge mask, prefers-reduced-motion fallback to scroll-snap.
+- Hero headline updated: "+5 mil cortes" → "+2200 cortes" (the only text change requested).
+- All 7 uploaded corte images are at /public/cortes/corte-01.png .. corte-07.png and load successfully.
+- Tested at 360, 390, 430, 1440 viewports: no horizontal scroll, hero image visible above text on mobile, cortes carousel slides smoothly.
