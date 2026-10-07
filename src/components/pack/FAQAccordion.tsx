@@ -7,7 +7,7 @@ import { Plus } from 'lucide-react'
 const FAQS = [
   {
     q: 'Qual a diferença entre o Inicial e o Completo?',
-    a: 'O Inicial traz 300 cortes. O Completo traz mais de 5 mil cortes e o treinamento completo.',
+    a: 'O Inicial traz 300 cortes de uma seleção reduzida. O Completo traz mais de 5 mil cortes, recursos extras e atualizações previstas. Os dois incluem os seis módulos.',
   },
   {
     q: 'Como recebo?',
@@ -19,7 +19,7 @@ const FAQS = [
   },
   {
     q: 'Isso garante que vou vender?',
-    a: 'Não. O pack e o treinamento dão o material e o caminho; o resultado depende da sua execução e do mercado.',
+    a: 'Não. O pack entrega o material e o treinamento mostra o caminho. O resultado depende da sua execução e do mercado.',
   },
   {
     q: 'E se eu não gostar?',
@@ -27,7 +27,11 @@ const FAQS = [
   },
   {
     q: 'Por quanto tempo tenho acesso?',
-    a: 'Acesso vitalício. Pague uma vez e o material fica disponível para sempre no seu Google Drive.',
+    a: 'Acesso vitalício. O material fica disponível no seu Google Drive mesmo após a eleição.',
+  },
+  {
+    q: 'O acesso acaba depois do segundo turno?',
+    a: 'Não. O acesso é vitalício e continua após 25/10/2026. O que acaba é o pico de atenção da eleição.',
   },
 ]
 

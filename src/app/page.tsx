@@ -28,12 +28,10 @@ const IMG = {
     'https://d8j0ntlcm91z4.cloudfront.net/user_36U380bZTAtVPkVynbGYAmiPX5F/hf_20261006_223934_63580822-f1cc-4da4-8f3c-ec8769f31276.png',
 }
 
-
 export default function PackPoliticaPage() {
   const { scrollY } = useScroll()
   const [showFloating, setShowFloating] = useState(false)
   useMotionValueEvent(scrollY, 'change', (y) => {
-    // show floating CTA after the user scrolls past the hero CTA
     setShowFloating(y > 600)
   })
 
@@ -43,22 +41,20 @@ export default function PackPoliticaPage() {
 
       {/* 1. HERO */}
       <Scene image={IMG.hero} mobileImage={IMG.heroM} variant="hero">
-        <motion.div variants={sceneStagger} initial="hidden" animate="show" className="max-w-[11.5em] max-[820px]:max-w-none">
+        <motion.div variants={sceneStagger} initial="hidden" animate="show" className="max-w-[12em] max-[820px]:max-w-none">
           <Kicker>Pack Política · acesso vitalício</Kicker>
           <motion.h1
             variants={sceneRise}
-            className="font-display text-[clamp(40px,7.2vw,92px)] font-bold leading-[1.02] tracking-[0.01em] max-[820px]:text-[clamp(34px,10.4vw,48px)] max-[360px]:text-[32px]"
+            className="font-display text-[clamp(40px,7.2vw,88px)] font-bold leading-[1.02] tracking-[0.01em] max-[820px]:text-[clamp(32px,9.6vw,44px)] max-[430px]:text-[clamp(30px,9vw,40px)] max-[360px]:text-[28px]"
           >
-            +2200 cortes de política para criar conteúdo e{' '}
-            <em className="not-italic text-[#e11d2e]">buscar suas primeiras vendas</em>
+            Mais de 5 mil cortes de política para criar conteúdo.
           </motion.h1>
           <Lead>
-            Escolha os cortes, monte seus vídeos e siga o treinamento para criar sua conta, oferecer
-            um infoproduto ou vender como afiliado. Você recebe o material <b>e</b> o caminho para
-            começar.
+            Acesse o acervo, escolha seus vídeos e siga seis módulos para montar sua conta, criar uma
+            oferta ou divulgar como afiliado.
           </Lead>
           <motion.div variants={sceneRise} className="mt-7 max-[820px]:mt-6">
-            <CTAButton href="#planos">Quero acesso ao pack</CTAButton>
+            <CTAButton href="#planos">Quero ver o pack</CTAButton>
           </motion.div>
           <motion.p variants={sceneRise} className="mt-3.5 text-[13px] text-[#9a948a]">
             Entrega por link do Google Drive · garantia de 7 dias
@@ -66,23 +62,23 @@ export default function PackPoliticaPage() {
         </motion.div>
       </Scene>
 
-      {/* 2. A virada */}
-      <Scene image={IMG.lados}>
-        <motion.div variants={sceneStagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}>
-          <Kicker>Enquanto todo mundo escolhe um lado</Kicker>
-          <H2>
-            O sistema precisa que você <em className="not-italic text-[#e11d2e]">brigue</em>. A atenção
-            gerada vira <em className="not-italic text-[#e11d2e]">audiência</em>.
-          </H2>
-          <Lead>
-            Política mexe com paixão e prende gente. De quatro em quatro anos o assunto toma conta do
-            feed, e quem tem vídeo pronto na hora publica enquanto os outros ainda estão procurando
-            material.
-          </Lead>
-        </motion.div>
-      </Scene>
+      {/* 2. FRASE CONTEXTUAL logo abaixo do hero */}
+      <section className="bg-[#07070a] py-7 max-[820px]:py-5">
+        <div className="pp-wrap">
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ type: 'spring', stiffness: 100, damping: 16 }}
+            className="mx-auto max-w-[40em] text-center text-[16px] leading-relaxed text-[#d8d3ca] max-[820px]:text-[14.5px] max-[820px]:leading-[1.55]"
+          >
+            O segundo turno é em 25 de outubro. Se você quer publicar durante essa conversa, comece
+            a preparar seu conteúdo e sua oferta agora.
+          </motion.p>
+        </div>
+      </section>
 
-      {/* 2b. ENTREGÁVEL TANGÍVEL */}
+      {/* 3. ACERVO TANGÍVEL — Veja o que cai no seu Drive */}
       <section className="py-24 max-[820px]:py-14">
         <div className="pp-wrap">
           <motion.div
@@ -96,8 +92,8 @@ export default function PackPoliticaPage() {
               Abriu o Drive, achou o corte, <em className="not-italic text-[#e11d2e]">arrastou pra timeline.</em>
             </H2>
             <Lead>
-              Nada de garimpar live de 3 horas. Os cortes já vêm separados por tema e momento, em
-              vertical, prontos para editar.
+              Nada de baixar live de 3 horas para aproveitar 3 segundos. Os cortes chegam separados
+              por tema e momento, no formato vertical, direto no editor.
             </Lead>
           </motion.div>
 
@@ -109,7 +105,21 @@ export default function PackPoliticaPage() {
         </div>
       </section>
 
-      {/* 2c. NOVA SEÇÃO: Por dentro dos cortes (carrossel de prints) */}
+      {/* 4. POR QUE POLÍTICA AGORA */}
+      <Scene image={IMG.lados}>
+        <motion.div variants={sceneStagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}>
+          <Kicker>Por que política agora</Kicker>
+          <H2>
+            O segundo turno coloca o assunto <em className="not-italic text-[#e11d2e]">no feed de todo mundo.</em>
+          </H2>
+          <Lead>
+            Quem tem vídeo pronto publica enquanto os outros ainda procuram material. O pack encurta
+            o caminho entre a ideia e o post.
+          </Lead>
+        </motion.div>
+      </Scene>
+
+      {/* 5. COMO SÃO OS CORTES — carrossel de prints */}
       <section className="py-24 max-[820px]:py-14">
         <div className="pp-wrap">
           <motion.div
@@ -123,7 +133,7 @@ export default function PackPoliticaPage() {
               Esse é o tipo de corte que <em className="not-italic text-[#e11d2e]">cai na sua pasta</em>
             </H2>
             <Lead>
-              Vertical, pronto para postar e feito para prender atenção. Veja exemplos.
+              Vertical, no formato que posta, com gancho desde o primeiro segundo. Veja exemplos.
             </Lead>
           </motion.div>
 
@@ -137,7 +147,7 @@ export default function PackPoliticaPage() {
         </div>
       </section>
 
-      {/* 3. O que vem dentro — split com mockup */}
+      {/* 6. DEMONSTRAÇÃO — Como funciona o arquivo (mockup do celular) */}
       <section className="py-24 max-[820px]:py-14">
         <div className="pp-wrap grid grid-cols-1 items-center gap-12 md:grid-cols-[0.8fr_1.2fr] md:gap-14">
           <PhoneMockup />
@@ -147,53 +157,52 @@ export default function PackPoliticaPage() {
             viewport={{ once: true, margin: '-60px' }}
             transition={{ type: 'spring', stiffness: 90, damping: 16 }}
           >
-            <Kicker>O que você recebe</Kicker>
+            <Kicker>Como funciona o arquivo</Kicker>
             <H2>
-              Cortes prontos. Você só <em className="not-italic text-[#e11d2e]">arrasta e publica</em>.
+              Abra a pasta, escolha o corte, leve para o editor e{' '}
+              <em className="not-italic text-[#e11d2e]">publique com sua abordagem.</em>
             </H2>
             <div className="mt-5">
               <AnimatedChecklist
                 items={[
-                  'Mais de 5 mil cortes verticais organizados por tema e momento',
                   'Pastas no Google Drive: ache a cena em segundos',
                   'Funciona no CapCut, Premiere, DaVinci ou qualquer editor',
-                  'Acesso vitalício: compre uma vez',
+                  'Acesso vitalício, sem assinatura',
                   'Treinamento passo a passo (abaixo)',
                 ]}
               />
             </div>
+            <p className="mt-4 text-[12px] text-[#7d786f]">
+              Prévia ilustrativa. Os cortes reais estão no Drive.
+            </p>
           </motion.div>
         </div>
       </section>
 
-      {/* 3b. ANTES x DEPOIS */}
+      {/* 7. COMPARAÇÃO — Com pack vs. sem pack */}
       <section className="bg-[#0d0d11] py-24 max-[820px]:py-14">
         <div className="pp-wrap">
           <Kicker>Por que o pack</Kicker>
           <H2>
-            A diferença entre <em className="not-italic text-[#e11d2e]">garimpar</em> e{' '}
-            <em className="not-italic text-[#e11d2e]">editar hoje mesmo</em>
+            Com o pack vs. <em className="not-italic text-[#e11d2e]">sem o pack</em>
           </H2>
           <VsBeforeAfter />
         </div>
       </section>
 
-      {/* 3c. A OPORTUNIDADE */}
+      {/* 8. O QUE FAZER COM OS CORTES — três caminhos */}
       <section className="py-24 max-[820px]:py-14">
         <div className="pp-wrap">
-          <Kicker>A oportunidade</Kicker>
+          <Kicker>O que fazer com os cortes</Kicker>
           <H2>
-            Um público <em className="not-italic text-[#e11d2e]">engajado</em>. Três jeitos de
-            transformar atenção em renda.
+            Três caminhos para <em className="not-italic text-[#e11d2e]">usar o material.</em>
           </H2>
           <Lead>
-            Política mobiliza gente de verdade, e a cada eleição o assunto toma conta do feed. Quem tem
-            material pronto na hora publica mais e aparece primeiro.
+            O pack entrega o arquivo. O treinamento mostra como publicar, oferecer ou afiliar.
           </Lead>
           <Paths />
           <p className="mt-3.5 text-[13px] text-[#9a948a]">
-            O pack entrega o material e o treinamento mostra o caminho. Os resultados dependem da sua
-            execução e do mercado, e não há garantia de ganhos.
+            O resultado depende da sua execução e do mercado. Não há garantia de ganhos.
           </p>
           <div className="mt-7">
             <CTAButton href="#planos">Quero começar agora</CTAButton>
@@ -201,7 +210,7 @@ export default function PackPoliticaPage() {
         </div>
       </section>
 
-      {/* 4. Treinamento */}
+      {/* 9. TREINAMENTO — seis módulos */}
       <Scene image={IMG.criador}>
         <motion.div
           variants={sceneStagger}
@@ -212,13 +221,32 @@ export default function PackPoliticaPage() {
         >
           <Kicker>Treinamento incluso</Kicker>
           <H2>
-            Do corte à <em className="not-italic text-[#e11d2e]">primeira venda</em>: o caminho completo
+            Seis módulos do corte à <em className="not-italic text-[#e11d2e]">oferta</em>
           </H2>
           <TrainingModules />
         </motion.div>
       </Scene>
 
-      {/* 5. Escassez */}
+      {/* 10. ACESSO PELO DRIVE — Como você recebe */}
+      <section className="bg-[#0d0d11] py-24 max-[820px]:py-14">
+        <div className="pp-wrap">
+          <Kicker>Como você recebe</Kicker>
+          <H2>
+            Pagou, recebeu o <em className="not-italic text-[#e11d2e]">link do Drive</em>
+          </H2>
+          <div className="mt-5">
+            <AnimatedChecklist
+              items={[
+                'Pagamento confirmado: o acesso é liberado',
+                'Abra o link do Google Drive no celular ou no computador',
+                'Escolha os cortes e monte seu vídeo',
+              ]}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 11. PRAZO ELEITORAL */}
       <Scene image={IMG.fios} variant="center" minH="70vh">
         <motion.div
           variants={sceneStagger}
@@ -227,16 +255,16 @@ export default function PackPoliticaPage() {
           viewport={{ once: true, margin: '-80px' }}
           className="mx-auto max-w-2xl text-center"
         >
-          <Kicker>A janela não é eterna</Kicker>
+          <Kicker>O prazo é real</Kicker>
           <motion.h2
             variants={sceneRise}
             className="mx-auto font-display text-[clamp(32px,5.4vw,66px)] font-bold leading-[1.02] tracking-[0.01em]"
           >
-            Fanatismo dá audiência. E <em className="not-italic text-[#e11d2e]">só volta em 4 anos</em>.
+            O segundo turno é em 25/10/2026. <em className="not-italic text-[#e11d2e]">A conversa acaba depois.</em>
           </motion.h2>
           <Lead className="mx-auto">
-            O 2º turno é em 25/10/2026. Depois disso, a atenção cai. Quem quiser aproveitar o momento
-            precisa começar agora.
+            O acesso ao pack é vitalício e continua após a eleição. Mas o pico de atenção acontece
+            agora — quem for publicar durante o ciclo precisa começar antes.
           </Lead>
           <motion.div variants={sceneRise} className="mt-7 flex justify-center">
             <CTAButton href="#planos" variant="red">
@@ -246,7 +274,7 @@ export default function PackPoliticaPage() {
         </motion.div>
       </Scene>
 
-      {/* 6. Planos */}
+      {/* 12. PLANOS */}
       <section id="planos" className="scroll-mt-20 py-24 max-[820px]:py-14">
         <div className="pp-wrap">
           <motion.div
@@ -268,26 +296,7 @@ export default function PackPoliticaPage() {
         </div>
       </section>
 
-      {/* 7. Como recebo */}
-      <section className="bg-[#0d0d11] py-24 max-[820px]:py-14">
-        <div className="pp-wrap">
-          <Kicker>Como funciona</Kicker>
-          <H2>
-            Pagou, recebeu o <em className="not-italic text-[#e11d2e]">link do Drive</em>
-          </H2>
-          <div className="mt-5">
-            <AnimatedChecklist
-              items={[
-                'Pagamento confirmado: o acesso é liberado',
-                'Abra o link do Google Drive no celular ou no computador',
-                'Escolha os cortes e monte seu vídeo',
-              ]}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* 8. FAQ */}
+      {/* 13. DÚVIDAS — FAQ */}
       <section className="py-24 max-[820px]:py-14">
         <div className="pp-wrap">
           <FAQAccordion />
@@ -305,7 +314,7 @@ export default function PackPoliticaPage() {
         </div>
       </footer>
 
-      {/* Floating CTA on mobile — appears after hero, hides at plans */}
+      {/* Floating CTA on mobile */}
       <motion.div
         initial={false}
         animate={{ y: showFloating ? 0 : 120, opacity: showFloating ? 1 : 0 }}
@@ -314,7 +323,7 @@ export default function PackPoliticaPage() {
         style={{ paddingBottom: 'max(12px, env(safe-area-inset-bottom))' }}
       >
         <CTAButton href="#planos" variant="amber" className="w-full justify-center text-sm" withArrow={false}>
-          Quero acesso vitalício
+          Quero ver o pack
         </CTAButton>
       </motion.div>
     </div>

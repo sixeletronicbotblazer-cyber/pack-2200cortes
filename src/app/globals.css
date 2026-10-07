@@ -372,13 +372,16 @@
     }
 
     /* HERO on mobile: image-on-top + text-below (image is NOT behind text).
-       The picture is a clipped block on top, with a 55% gradient fade at its bottom;
-       the text content slides up by 190px to overlap that fade. */
+       Raised by ~70px: image block 75svh → 67svh, with object-fit: contain so
+       the whole character is visible (no cropping of mask/hat/face). The dark
+       background (#07070a, matching the page) expands around the image to fill
+       the container, so the empty space blends seamlessly with the page. */
     .pp-hero {
       display: block;
       min-height: 0;
       padding: 0;
       align-items: initial;
+      background-color: #07070a;
     }
     /* No dark overlay over the hero image on mobile */
     .pp-hero .pp-overlay,
@@ -391,11 +394,12 @@
       z-index: 0;
       display: block;
       width: 100%;
-      /* taller image block (raised by ~2cm / ~80px): was 68svh, now 75svh */
-      height: 75svh;
-      min-height: 480px;
-      max-height: 680px;
+      /* shorter block (raised ~70px): was 75svh, now 67svh */
+      height: 67svh;
+      min-height: 420px;
+      max-height: 600px;
       overflow: hidden;
+      background-color: #07070a;
     }
     /* 55% bottom gradient that fades image into #07070a */
     .pp-hero .pp-hero-picture::after {
@@ -416,17 +420,20 @@
       display: block;
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      /* lift the character ~80px more: was center 15%, now center 10% (shows higher up the image
-         so the face/hat move up in the visible frame) */
-      object-position: center 10% !important;
+      /* object-fit: contain shows the WHOLE character (mask/hat/face) without
+         cropping. The dark background (#07070a) expands around the image to fill
+         the container — per user request: "Se o arquivo não preencher a nova
+         área, expanda o fundo escuro ao redor dela." */
+      object-fit: contain;
+      object-position: center top !important;
     }
-    /* Text content rises 190px over the gradient (was 110px, +80px to match the image lift)
-       so the title and subheadline are also raised by the same ~2cm. */
+    /* Text content rises 120px over the gradient (was 190px; reduced to keep
+       headline/subheadline/CTA closer to the image without fully covering it,
+       and to compensate for the shorter image block — net raise ~70px). */
     .pp-hero .pp-scene-content {
       position: relative;
       z-index: 1;
-      margin-top: -190px;
+      margin-top: -120px;
       padding-top: 0;
       padding-bottom: 48px;
     }

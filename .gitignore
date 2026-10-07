@@ -66,4 +66,4 @@ server.log
 # Local dev artifacts
 worklog.md
 .z-ai-config
-.claude
+.claudepreview-*.png

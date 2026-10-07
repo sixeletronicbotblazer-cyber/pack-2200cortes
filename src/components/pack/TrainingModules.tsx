@@ -4,28 +4,28 @@ import { motion } from 'framer-motion'
 
 const MODULES = [
   {
-    title: 'Como criar um infoproduto',
-    desc: 'Do zero, com o que você já tem em mãos.',
+    title: 'Criar seus perfis no Instagram, TikTok e YouTube Shorts',
+    desc: 'Abra e organize suas contas nos três canais.',
   },
   {
-    title: 'Página de vendas simples',
-    desc: 'O que oferecer e como apresentar.',
+    title: 'Escolher o que oferecer ao público de política',
+    desc: 'Defina o que fazer com a audiência do nicho.',
   },
   {
-    title: 'O que vender nesta reta final',
-    desc: 'Ideias de oferta e de afiliação ligadas ao tema.',
+    title: 'Criar seu infoproduto',
+    desc: 'Estruture um produto digital a partir do que você já tem.',
   },
   {
-    title: 'Contas no Instagram, TikTok e YouTube Shorts',
-    desc: 'Como abrir e organizar sua presença.',
+    title: 'Montar sua página de vendas',
+    desc: 'Construa uma página simples que apresenta a oferta.',
   },
   {
-    title: 'Como divulgar seus links',
-    desc: 'Onde colocar e como chamar para a ação.',
+    title: 'Divulgar links e trabalhar como afiliado',
+    desc: 'Aprenda a divulgar links e atuar como afiliado.',
   },
   {
-    title: 'Vídeos animados com IA no Flow',
-    desc: 'Crie cenas próprias para complementar os cortes.',
+    title: 'Editar cortes e criar vídeos com IA',
+    desc: 'Use IA para criar cenas que completam os cortes.',
   },
 ]
 

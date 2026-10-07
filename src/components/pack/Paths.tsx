@@ -5,18 +5,18 @@ import { motion } from 'framer-motion'
 const PATHS = [
   {
     num: '01',
-    title: 'Viralizar',
-    desc: 'Poste cortes em Instagram, TikTok e Shorts e construa audiência com volume e velocidade.',
+    title: 'Publicar',
+    desc: 'Poste os cortes no Instagram, TikTok e Shorts.',
   },
   {
     num: '02',
-    title: 'Vender cortes',
-    desc: 'Use o material para criar e oferecer conteúdo para páginas, perfis e criadores do nicho.',
+    title: 'Oferecer',
+    desc: 'Use o material para criar conteúdo para páginas e perfis do nicho.',
   },
   {
     num: '03',
-    title: 'Infoprodutos e afiliação',
-    desc: 'Leve essa audiência para uma oferta sua ou para produtos de afiliado ligados ao tema.',
+    title: 'Afiliar',
+    desc: 'Leve a audiência para uma oferta sua ou para produtos de afiliado.',
   },
 ]
 

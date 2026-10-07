@@ -42,14 +42,14 @@ export function VsBeforeAfter() {
         className="border-t-[3px] border-[#4a4a52] bg-[#0f0f13] p-7 max-[820px]:p-6 max-[820px]:px-5"
       >
         <h3 className="mb-3 font-display text-[24px] font-bold uppercase max-[820px]:text-[20px]">
-          Do jeito difícil
+          Sem o pack
         </h3>
         <ul className="grid gap-3 text-[#b9b3a9] max-[820px]:text-[14px]">
           {[
             'Baixar live de horas para aproveitar 3 segundos',
-            'Garimpar material bruto antes de começar a editar',
+            'Procurar material bruto antes de editar',
             'Converter, recortar e ajustar cada arquivo',
-            'Perder o dia inteiro para entregar um vídeo',
+            'Perder o dia para entregar um vídeo',
           ].map((s, i) => (
             <motion.li
               key={s}
@@ -91,7 +91,7 @@ export function VsBeforeAfter() {
         <ul className="relative grid gap-3 text-[#d8d3ca] max-[820px]:text-[14px]">
           {[
             'Abre a pasta do tema e escolhe o corte',
-            'Cena já em vertical, pronta para a timeline',
+            'Cena em vertical, no formato da timeline',
             'Edita, legenda e posta no mesmo dia',
             'Mais vídeos publicados na mesma semana',
           ].map((s, i) => (

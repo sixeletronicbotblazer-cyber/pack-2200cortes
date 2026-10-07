@@ -131,14 +131,14 @@ export function UpsellModal({ isOpen, onClose, onAccept, onDecline }: UpsellModa
                 className="font-display text-[clamp(24px,6vw,32px)] font-bold uppercase leading-[1.05] tracking-[0.01em]"
               >
                 pega o <span className="text-[#f5a524]">completo</span> por mais{' '}
-                <span className="text-[#e11d2e]">R$ 10</span>
+                <span className="text-[#e11d2e]">R$ 13</span>
               </h3>
 
               {/* copy */}
               <p className="mt-3 text-[14px] leading-relaxed text-[#d8d3ca]">
-                Você estava levando 300 cortes. Por mais <b className="text-white">R$ 10</b> você
-                recebe <b className="text-white">+2200 cortes</b>, o treinamento completo e os vídeos
-                com IA no Flow. Oferta única — não aparece depois.
+                Você estava levando 300 cortes. Por mais <b className="text-white">R$ 13</b> você
+                recebe <b className="text-white">mais de 5 mil cortes</b>, os seis módulos, recursos
+                extras e atualizações previstas. Oferta única — não aparece depois.
               </p>
 
               {/* scarcity spots */}
@@ -159,12 +159,12 @@ export function UpsellModal({ isOpen, onClose, onAccept, onDecline }: UpsellModa
                   <div className="flex items-end gap-1">
                     <span className="font-display text-[18px] text-[#9a948a]">R$</span>
                     <span className="font-display text-[clamp(40px,11vw,52px)] font-bold leading-none text-white tabular-nums">
-                      24,90
+                      27,90
                     </span>
                   </div>
                 </div>
                 <div className="mb-1 inline-block rounded-[4px] bg-[#1a0b0e] px-2 py-1 text-[11px] font-bold uppercase text-[#e11d2e]">
-                  -37%
+                  -30%
                 </div>
               </div>
 
@@ -180,7 +180,7 @@ export function UpsellModal({ isOpen, onClose, onAccept, onDecline }: UpsellModa
                   }}
                   withArrow={false}
                 >
-                  Quero o Completo por R$ 24,90
+                  Quero o Completo por R$ 27,90
                 </CTAButton>
               </div>
 

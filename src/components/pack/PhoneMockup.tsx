@@ -61,11 +61,9 @@ export function PhoneMockup() {
           }}
         />
 
-        {/* caption */}
-        <div className="absolute inset-x-0 top-1/2 z-20 -translate-y-1/2 text-center font-display text-[26px] font-bold uppercase leading-none text-white [text-shadow:0_2px_8px_#000]">
-          Seu <span className="text-[#f5a524]">corte</span>
-          <br />
-          pronto
+        {/* caption — honest about being a preview, not a real cut */}
+        <div className="absolute inset-x-0 top-1/2 z-20 -translate-y-1/2 text-center font-display text-[22px] font-bold uppercase leading-none text-white [text-shadow:0_2px_8px_#000] max-[820px]:text-[18px]">
+          Prévia do <span className="text-[#f5a524]">arquivo</span>
         </div>
 
         {/* shine sweep */}
