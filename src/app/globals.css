@@ -115,8 +115,9 @@
 @layer utilities {
   .pp-wrap {
     max-width: 1080px;
-    margin: 0 auto;
-    padding: 0 22px;
+    margin-left: auto;
+    margin-right: auto;
+    /* only horizontal padding — vertical padding is set by .pp-scene-content */
     padding-left: max(22px, env(safe-area-inset-left));
     padding-right: max(22px, env(safe-area-inset-right));
   }
@@ -210,7 +211,9 @@
     position: relative;
     z-index: 1;
     width: 100%;
-    padding: 96px 0;
+    /* use longhand so .pp-wrap (which sets horizontal padding) doesn't override these */
+    padding-top: 96px;
+    padding-bottom: 96px;
   }
 
   /* Hero variant — on mobile, image goes on top, text overlaps below */
@@ -291,12 +294,8 @@
     animation: pp-cortes-marquee linear infinite;
     will-change: transform;
   }
-  /* pause on hover (desktop) and touch/active (mobile) */
-  .pp-cortes-pause:hover .pp-cortes-marquee,
-  .pp-cortes-pause:focus-within .pp-cortes-marquee,
-  .pp-cortes-pause:active .pp-cortes-marquee {
-    animation-play-state: paused;
-  }
+  /* NOTE: the marquee never pauses — the user explicitly asked for continuous scroll
+     even on hover/touch. The per-card hover lift effect is preserved (see .pp-cortes-card:hover). */
   .pp-cortes-card {
     width: 200px;
     aspect-ratio: 9 / 19.5;
@@ -368,12 +367,13 @@
       height: 70px;
     }
     .pp-scene-content {
-      padding: 72px 0;
+      padding-top: 72px;
+      padding-bottom: 72px;
     }
 
     /* HERO on mobile: image-on-top + text-below (image is NOT behind text).
        The picture is a clipped block on top, with a 55% gradient fade at its bottom;
-       the text content slides up by 84px to overlap that fade. */
+       the text content slides up by 110px to overlap that fade. */
     .pp-hero {
       display: block;
       min-height: 0;
@@ -391,9 +391,10 @@
       z-index: 0;
       display: block;
       width: 100%;
-      height: 62svh;
-      min-height: 380px;
-      max-height: 560px;
+      /* taller image block so the character has more room and rises in the frame */
+      height: 68svh;
+      min-height: 420px;
+      max-height: 620px;
       overflow: hidden;
     }
     /* 55% bottom gradient that fades image into #07070a */
@@ -416,13 +417,16 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 22% !important;
+      /* lift the character: show higher up the image so the face/hat are visible
+         (was center 22% → now center 15%) */
+      object-position: center 15% !important;
     }
-    /* Text content slides up 84px over the gradient; padding-bottom 48px */
+    /* Text content rises 110px over the gradient (was 84px) so the title and
+       subheadline sit closer to the image without fully covering it. */
     .pp-hero .pp-scene-content {
       position: relative;
       z-index: 1;
-      margin-top: -84px;
+      margin-top: -110px;
       padding-top: 0;
       padding-bottom: 48px;
     }

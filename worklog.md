@@ -270,3 +270,70 @@ Stage Summary:
 - Hero headline updated: "+5 mil cortes" → "+2200 cortes" (the only text change requested).
 - All 7 uploaded corte images are at /public/cortes/corte-01.png .. corte-07.png and load successfully.
 - Tested at 360, 390, 430, 1440 viewports: no horizontal scroll, hero image visible above text on mobile, cortes carousel slides smoothly.
+
+---
+Task ID: 5
+Agent: main (Z.ai Code)
+Task: Pricing opinion + implement upsell popup, remove carrossel pause-on-hover, adjust hero mobile image positioning.
+
+Work Log:
+- Answered pricing question: R$ 39,90 vs R$ 14,90 = 2,67x gap — at the upper end of low-ticket anchor range, but the upsell approach (R$ 14,90 + R$ 10 = R$ 24,90) softens the gap and is a classic order-bump pattern.
+
+- Created `src/components/pack/UpsellModal.tsx` — order-bump popup that opens when user clicks "Quero o Inicial" (instead of navigating straight to checkout):
+  - Backdrop: `bg-black/80 backdrop-blur-sm`, click closes modal
+  - Card: dark `#0d0d11` with `border border-[#f5a524]/40`, max-width 460px, top glow gradient
+  - Top row: red "ESPERA!" pill kicker (with Zap icon, pulses) + 5-minute countdown timer (ScarcityTimer with live mm:ss ticking)
+  - Headline: "PEGA O COMPLETO POR MAIS R$ 10" (COMPLETO in amber, R$ 10 in red)
+  - Copy: explains the bump — 300 cortes → +2200 cortes + treinamento + Flow, "Oferta única — não aparece depois"
+  - Scarcity spots: animated ping dot + "restam 17 vagas com esse preço"
+  - Price block: strikethrough R$ 39,90 (gray), new price R$ 24,90 (large bold white), -37% badge (red)
+  - Big affirming amber CTA: "Quero o Completo por R$ 24,90" (withArrow=false, w-full)
+  - Very small decline link below: "Não, quero só o Inicial por R$ 14,90"
+  - Escape key closes, body scroll locked while open, AnimatePresence for entrance/exit, ARIA dialog/modal attributes
+  - Accept CTA: `preventDefault` + `onAccept` callback (navigates to #CHECKOUT_COMPLETO)
+  - Decline link: `onDecline` callback (navigates to #CHECKOUT_INICIAL)
+  - Close button (X) in top-right for escape hatches
+
+- Updated `CTAButton.tsx`: changed `onClick` type from `() => void` to `(e: React.MouseEvent<HTMLAnchorElement>) => void` so callers can call `e.preventDefault()` to intercept the navigation.
+
+- Updated `Plans.tsx`:
+  - Added `useState(false)` for `upsellOpen`
+  - Wrapped the plans grid + `<UpsellModal>` in a fragment
+  - The Inicial plan's CTA: `onClick={(e) => { e.preventDefault(); setUpsellOpen(true) }}` — opens the upsell instead of going straight to checkout
+  - The Completo plan's CTA: unchanged, navigates directly to #CHECKOUT_COMPLETO
+  - UpsellModal handlers: `onAccept` → setUpsellOpen(false) + `window.location.hash = 'CHECKOUT_COMPLETO'`; `onDecline` → setUpsellOpen(false) + `window.location.hash = 'CHECKOUT_INICIAL'`
+
+- Removed carrossel pause-on-hover:
+  - Deleted the `.pp-cortes-pause:hover .pp-cortes-marquee, .pp-cortes-pause:focus-within .pp-cortes-marquee, .pp-cortes-pause:active .pp-cortes-marquee { animation-play-state: paused }` rule
+  - Added a comment explaining the marquee never pauses (per user request — continuous scroll even on hover/touch)
+  - The per-card hover lift effect (`translateY(-10px) scale(1.04)` + red shadow) is preserved
+
+- Adjusted hero mobile (image more prominent, character higher, text closer to image):
+  - Picture block: `height: 62svh → 68svh` (taller)
+  - Min-height: `380px → 420px`, max-height: `560px → 620px`
+  - Image object-position: `center 22% → center 15%` (lifts the character, shows face/hat higher in the frame)
+  - Text content margin-top: `-84px → -110px` (text rises 110px over the gradient, so title and subheadline sit closer to the image without fully covering it)
+
+- Found and fixed a CSS specificity bug:
+  - `.pp-wrap` (in @layer utilities) had `padding: 0 22px` (shorthand) which set padding-top:0 and padding-bottom:0, overriding `.pp-scene-content`'s `padding: 96px 0` (also shorthand) for the same element (since the div has both classes)
+  - .pp-wrap (utilities layer) has higher priority than .pp-scene-content (components layer), so .pp-wrap won
+  - Result: the hero mobile `margin-top: -110px` and `padding-bottom: 48px` rules were being overridden (both computed to 0px)
+  - Fix: changed .pp-wrap to use longhand (`margin-left: auto; margin-right: auto; padding-left: 22px; padding-right: 22px` — no top/bottom), and .pp-scene-content to use longhand (`padding-top: 96px; padding-bottom: 96px`)
+  - Verified: hero mobile now correctly computes `margin-top: -110px`, `padding-top: 0px`, `padding-bottom: 48px` ✓
+
+Verification (Agent Browser + VLM):
+- Mobile (390×844) hero: image visible at top with masked character's face/hat fully visible, headline rising up over the bottom of the image (overlapping the fade), title and subheadline positioned closer to the image now. ✓
+- Mobile (390×844) computed styles: picture height 573.91px (68svh), min-height 420px, max-height 620px; image object-position: 50% 15%; content margin-top: -110px; content padding-bottom: 48px. ✓
+- Mobile (390×844) upsell popup: VLM confirmed all elements present — red "ESPERA!" kicker, countdown timer "04:59", headline "PEGA O COMPLETO POR MAIS R$ 10" (COMPLETO in amber, R$ 10 in red), copy about +2200 cortes/treinamento/Flow, scarcity "restam 17 vagas com esse preço", strikethrough R$ 39,90, new price R$ 24,90, -37% badge, big amber CTA "QUERO O COMPLETO POR R$ 24,90", decline link "Não, quero só o Inicial por R$ 14,90", X close button. ✓
+- Accept CTA: closes modal + changes URL hash to #CHECKOUT_COMPLETO ✓
+- Decline link: closes modal + changes URL hash to #CHECKOUT_INICIAL ✓
+- Carrossel: animation-play-state stays "running" even on hover (pause rule removed) ✓
+- Desktop (1440×900) hero: unchanged — masked character visible as full-bleed background, headline overlaid on the left. ✓
+- Desktop (1440×900) upsell popup: also works when Inicial CTA clicked. ✓
+- Lint clean.
+
+Stage Summary:
+- Upsell popup (order bump) implemented: Inicial CTA now opens a modal offering the Complete pack for +R$ 10 (R$ 24,90 total, -37% off R$ 39,90). Big affirming CTA + very small decline link. Scarcity timer + spots.
+- Carrossel no longer pauses on hover — continuous scroll always.
+- Hero mobile: image is now taller (68svh), character lifted (object-position 15%), and title/subheadline rise 110px over the image's bottom fade (was 84px) — closer to the image without fully covering it.
+- Fixed a CSS specificity bug where .pp-wrap's shorthand padding was overriding .pp-scene-content's vertical padding.

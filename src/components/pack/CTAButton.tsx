@@ -9,7 +9,7 @@ type CTAButtonProps = {
   href?: string
   variant?: 'amber' | 'red' | 'ghost'
   className?: string
-  onClick?: () => void
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void
   withArrow?: boolean
 }
 
