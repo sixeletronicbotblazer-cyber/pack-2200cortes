@@ -371,11 +371,10 @@
       padding-bottom: 72px;
     }
 
-    /* HERO on mobile: image-on-top + text-below (image is NOT behind text).
-       Raised by ~70px: image block 75svh → 67svh, with object-fit: contain so
-       the whole character is visible (no cropping of mask/hat/face). The dark
-       background (#07070a, matching the page) expands around the image to fill
-       the container, so the empty space blends seamlessly with the page. */
+    /* HERO on mobile: image fills the container (object-fit: cover), character
+       is ~23% bigger than with contain, centered to show hat/mask/hands.
+       Text rises -200px over the image, starting at chest height. Soft
+       bottom-to-top gradient behind text for readability (no rectangular box). */
     .pp-hero {
       display: block;
       min-height: 0;
@@ -383,7 +382,6 @@
       align-items: initial;
       background-color: #07070a;
     }
-    /* No dark overlay over the hero image on mobile */
     .pp-hero .pp-overlay,
     .pp-hero .pp-fade {
       display: none;
@@ -394,22 +392,29 @@
       z-index: 0;
       display: block;
       width: 100%;
-      /* shorter block (raised ~70px): was 75svh, now 67svh */
-      height: 67svh;
-      min-height: 420px;
-      max-height: 600px;
+      height: 70svh;
+      min-height: 440px;
+      max-height: 620px;
       overflow: hidden;
       background-color: #07070a;
     }
-    /* 55% bottom gradient that fades image into #07070a */
+    /* Soft bottom-to-top gradient — 75% of image height, gradual 5-stop fade
+       so there's no visible rectangular box edge. */
     .pp-hero .pp-hero-picture::after {
       content: "";
       position: absolute;
       left: 0;
       right: 0;
       bottom: 0;
-      height: 55%;
-      background: linear-gradient(transparent, #07070a);
+      height: 75%;
+      background: linear-gradient(
+        to top,
+        rgba(7, 7, 10, 0.92) 0%,
+        rgba(7, 7, 10, 0.7) 25%,
+        rgba(7, 7, 10, 0.4) 50%,
+        rgba(7, 7, 10, 0.15) 75%,
+        transparent 100%
+      );
       z-index: 1;
       pointer-events: none;
     }
@@ -420,20 +425,19 @@
       display: block;
       width: 100%;
       height: 100%;
-      /* object-fit: contain shows the WHOLE character (mask/hat/face) without
-         cropping. The dark background (#07070a) expands around the image to fill
-         the container — per user request: "Se o arquivo não preencher a nova
-         área, expanda o fundo escuro ao redor dela." */
-      object-fit: contain;
-      object-position: center top !important;
+      /* object-fit: cover fills the container (no empty space), character is
+         ~23% bigger than with contain. object-position: center 45% centers
+         on the character, showing hat (35-48%) + mask/face (44-56%) + hands
+         (~90%) without cutting the top of the hat. */
+      object-fit: cover;
+      object-position: center 45% !important;
     }
-    /* Text content rises 120px over the gradient (was 190px; reduced to keep
-       headline/subheadline/CTA closer to the image without fully covering it,
-       and to compensate for the shorter image block — net raise ~70px). */
+    /* Text content rises 200px over the image (was -120px), so the headline
+       starts at approximately chest height, with the face/mask area free. */
     .pp-hero .pp-scene-content {
       position: relative;
       z-index: 1;
-      margin-top: -120px;
+      margin-top: -200px;
       padding-top: 0;
       padding-bottom: 48px;
     }

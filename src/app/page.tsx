@@ -47,11 +47,10 @@ export default function PackPoliticaPage() {
             variants={sceneRise}
             className="font-display text-[clamp(40px,7.2vw,88px)] font-bold leading-[1.02] tracking-[0.01em] max-[820px]:text-[clamp(32px,9.6vw,44px)] max-[430px]:text-[clamp(30px,9vw,40px)] max-[360px]:text-[28px]"
           >
-            Mais de 5 mil cortes de política para criar conteúdo.
+            Mais de <em className="not-italic text-[#e11d2e]">5 mil cortes</em> de política para criar conteúdo.
           </motion.h1>
           <Lead>
-            Acesse o acervo, escolha seus vídeos e siga seis módulos para montar sua conta, criar uma
-            oferta ou divulgar como afiliado.
+            Receba os cortes e 6 módulos para criar conteúdo e montar sua oferta.
           </Lead>
           <motion.div variants={sceneRise} className="mt-7 max-[820px]:mt-6">
             <CTAButton href="#planos">Quero ver o pack</CTAButton>
