@@ -543,3 +543,61 @@ Stage Summary:
 - Subheadline: shorter "Receba os cortes e 6 módulos para criar conteúdo e montar sua oferta."
 - Desktop hero unchanged
 - All widths (320, 375, 390, 430, 1440) verified: no horizontal scroll
+
+---
+Task ID: 10
+Agent: main (Z.ai Code)
+Task: Rewrite ONLY the countdown bar — new copy, mobile centered layout, desktop two-area layout.
+
+Work Log:
+- Rewrote `src/components/pack/CountdownBar.tsx` completely.
+
+New copy (removed "a janela fecha" and "só volta daqui a 4 anos"):
+- Small line: "RETA FINAL DAS ELEIÇÕES"
+- Big white date: "25 DE OUTUBRO" (font-display bold, the focus)
+- Support line: "Prepare seus cortes e sua oferta antes do 2º turno."
+- Small line above counter: "FALTAM PARA A VOTAÇÃO"
+- 4 columns: DIAS / HORAS / MIN / SEG
+
+Mobile layout (≤820px, centered vertical stack):
+- Bar height ~200px (enough to breathe, not compressed into thin bar)
+- Centered composition, 20px lateral margin (pp-wrap)
+- "25 DE OUTUBRO" as focus: 32px on 390px (scales: 30px@430, 27px@375, 25px@360/320)
+- Counter numbers: 26px (mobile) / 28px (desktop), font-display bold
+- 4 equal columns via `grid grid-cols-4 gap-2`
+- Labels: 9px uppercase, whitespace-nowrap (no weird breaks)
+- Darker red strip (`bg-[#b21624]`) behind ALL 4 columns — single rounded container, no individual cards
+- Removed the old FlipDigit component (with flip animation + black/30 box) — replaced with simpler CounterColumn
+
+Desktop layout (>820px, two areas):
+- `md:flex-row md:justify-between` — left area and right area
+- Left: "RETA FINAL DAS ELEIÇÕES" + "25 DE OUTUBRO" + support phrase (left-aligned)
+- Right: "FALTAM PARA A VOTAÇÃO" + 4-column counter (right-aligned, compact, NOT stretched full width)
+- "25 DE OUTUBRO" is the strongest element (34px font-display bold)
+
+Functionality:
+- Countdown target: 2026-10-25T17:00:00-03:00 (2nd round date)
+- Days, hours, minutes, seconds calculated correctly (Math.max(0, ...) prevents negatives)
+- When date passes (t.total <= 0): shows "A votação do 2º turno já aconteceu." instead of counter — no negative numbers, no empty bar
+- Red bar (#e11d2e) preserved
+- Yellow bottom line (4px progress bar with yellow gradient) preserved — "filete amarelo inferior"
+- Removed the traveling white dot marker (was causing 6px horizontal overflow, user didn't mention it in this request)
+
+Verification (Agent Browser + DOM + VLM):
+- 390px DOM: texts=["Reta final das eleições", "25 de outubro", "Prepare seus cortes e sua oferta antes do 2º turno.", "Faltam para a votação", counter 18dias 15horas 23min 49seg], canScrollX=false, barH=200px ✓
+- 320px: canScrollX=false, scrollW=320=clientW, barH=195px ✓
+- 375px: canScrollX=false, scrollW=375=clientW, barH=200px ✓
+- 430px: canScrollX=false, scrollW=430=clientW, barH=204px ✓
+- Desktop 1440px: two areas (left=date+phrase, right=counter), "25 DE OUTUBRO" is strongest, counter compact (not stretched) ✓
+- VLM 390px: confirmed all text visible, 4 columns on darker red background, bar tall enough, no horizontal scroll ✓
+- VLM desktop: confirmed two-area layout, date as strongest element, counter compact ✓
+- Lint clean
+- Committed (57c6468) and pushed to GitHub
+
+Stage Summary:
+- Countdown bar completely rewritten with new copy, mobile centered layout (tall enough to breathe), desktop two-area layout
+- "25 DE OUTUBRO" is the visual focus (big white condensed bold)
+- Counter on darker red strip (single container, no 4 individual cards)
+- Removed "a janela fecha" and "só volta daqui a 4 anos" — counter marks the 2nd round date, not pack access expiration
+- When date passes, shows message instead of counter (no negative numbers)
+- Verified at 320, 375, 390, 430px + desktop: no horizontal scroll
